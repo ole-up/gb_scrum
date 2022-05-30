@@ -7,18 +7,18 @@ def main(request):
     title = "главная"
     habr = [
         {
-            "name": "Отличный стул",
-            "desc": "Расположитесь комфортно.",
-            "image_src": "product-1.jpg",
-            "image_href": "/product/1/",
-            "alt": "продукт 1",
+            "name": "Новости из мира IT",
+            "desc": "Новости из мира IT со всего мира",
+            "image_src": "",
+            "image_href": "",
+            "alt": "...",
         },
         {
-            "name": "Стул повышенного качества",
+            "name": "Новости со всего мира",
             "desc": "Не оторваться.",
-            "image_src": "product-2.jpg",
-            "image_href": "/product/2/",
-            "alt": "продукт 2",
+            "image_src": "",
+            "image_href": "",
+            "alt": "...",
         },
     ]
     content = {"title": title, "habr": habr}
@@ -26,24 +26,24 @@ def main(request):
 
 
 def habr(request):
-    title = "продукты"
+    title = "Новости"
     links_menu = [
-        {"href": "habr_all", "name": "все"},
-        {"href": "habr_home", "name": "дом"},
-        {"href": "habr_office", "name": "офис"},
-        {"href": "habr_modern", "name": "модерн"},
-        {"href": "habr_classic", "name": "классика"},
+        {"href": "habr_all", "name": "Все"},
+        {"href": "habr_home", "name": "ИТ"},
+        {"href": "habr_office", "name": "Языки программирования"},
+        {"href": "habr_modern", "name": "Микроконтроллеры"},
+        {"href": "habr_classic", "name": "Хакерам"},
     ]
     same_habr = [
-        {"name": "Отличный стул", "desc": "Не оторваться.",
-            "image_src": "product-11.jpg", "alt": "продукт 11"},
-        {"name": "Стул повышенного качества", "desc": "Комфортно.",
-            "image_src": "product-21.jpg", "alt": "продукт 21"},
+        {"name": "Отличная новость", "desc": "Не оторваться.",
+            "image_src": "", "alt": "..."},
+        {"name": "Свежая новость", "desc": "То-то еще будет",
+            "image_src": "", "alt": "..."},
         {
-            "name": "Стул премиального качества",
+            "name": "Новости для хакинга",
             "desc": "Просто попробуйте.",
-            "image_src": "product-31.jpg",
-            "alt": "продукт 31",
+            "image_src": "",
+            "alt": "...",
         },
     ]
     content = {"title": title, "links_menu": links_menu,
@@ -55,19 +55,11 @@ def help(request):
     title = "о нас"
     visit_date = datetime.datetime.now()
     locations = [
-        {"city": "Москва", "phone": "+7-888-888-8888",
-            "email": "info@geekshop.ru", "address": "В пределах МКАД"},
         {
-            "city": "Екатеринбург",
-            "phone": "+7-777-777-7777",
-            "email": "info_yekaterinburg@geekshop.ru",
+            "city": "Moscow",
+            "phone": "+7-495-777-7777",
+            "email": "info_habr@geekbrains.ru",
             "address": "Близко к центру",
-        },
-        {
-            "city": "Владивосток",
-            "phone": "+7-999-999-9999",
-            "email": "info_vladivostok@geekshop.ru",
-            "address": "Близко к океану",
         },
     ]
     content = {"title": title, "visit_date": visit_date,
