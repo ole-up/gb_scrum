@@ -2,19 +2,18 @@
 <ul class="menu">
     <li>
         <a href="{% url 'main' %}" class="{% if request.resolver_match.url_name == 'main' %}active{% endif %}">
-            домой
+            Главная
         </a>
     </li>
     <li>
-        <a href="{% url 'products' %}" class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">
-            продукты
+        <a href="{% url 'habr' %}" class="{% if request.resolver_match.url_name == 'habr' %}active{% endif %}">
+            Хабр
         </a>
     </li>
     <li>
-        <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
-            контакты
+        <a href="{% url 'help' %}" class="{% if request.resolver_match.url_name == 'help' %}active{% endif %}">
+            Помощь
         </a>
     </li>
 </ul>
 <a href="#" class="search"></a>
-<a href="#" class="basket"></a>

@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 def main(request):
     title = "главная"
-    products = [
+    habr = [
         {
             "name": "Отличный стул",
             "desc": "Расположитесь комфортно.",
@@ -21,20 +21,20 @@ def main(request):
             "alt": "продукт 2",
         },
     ]
-    content = {"title": title, "products": products}
+    content = {"title": title, "habr": habr}
     return render(request, "mainapp/index.html", content)
 
 
-def products(request):
+def habr(request):
     title = "продукты"
     links_menu = [
-        {"href": "products_all", "name": "все"},
-        {"href": "products_home", "name": "дом"},
-        {"href": "products_office", "name": "офис"},
-        {"href": "products_modern", "name": "модерн"},
-        {"href": "products_classic", "name": "классика"},
+        {"href": "habr_all", "name": "все"},
+        {"href": "habr_home", "name": "дом"},
+        {"href": "habr_office", "name": "офис"},
+        {"href": "habr_modern", "name": "модерн"},
+        {"href": "habr_classic", "name": "классика"},
     ]
-    same_products = [
+    same_habr = [
         {"name": "Отличный стул", "desc": "Не оторваться.",
             "image_src": "product-11.jpg", "alt": "продукт 11"},
         {"name": "Стул повышенного качества", "desc": "Комфортно.",
@@ -47,11 +47,11 @@ def products(request):
         },
     ]
     content = {"title": title, "links_menu": links_menu,
-               "same_products": same_products}
-    return render(request, "mainapp/products.html", content)
+               "same_habr": same_habr}
+    return render(request, "mainapp/habr.html", content)
 
 
-def contact(request):
+def help(request):
     title = "о нас"
     visit_date = datetime.datetime.now()
     locations = [
@@ -72,4 +72,4 @@ def contact(request):
     ]
     content = {"title": title, "visit_date": visit_date,
                "locations": locations}
-    return render(request, "mainapp/contact.html", content)
+    return render(request, "mainapp/help.html", content)

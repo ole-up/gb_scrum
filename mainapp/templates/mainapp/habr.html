@@ -16,9 +16,9 @@
 		{% include 'mainapp/includes/inc_categories_menu.html' %}
 	</div>
 
-	<div class="details-products">
+	<div class="details-habr">
 		<div class="details-slider">
-			<div class="slider-product">
+			<div class="slider-new">
 				<img src="{% static 'img/slider1.jpg' %}">
 			</div>
 			<div class="slider-control">
@@ -41,37 +41,32 @@
 		</div>
 
 		<div class="description">
-			<h3 class="big-bold">Отличный стул</h3>
-			<h3 class="red">горячее предложение</h3>
-			<p class="price"> 2585.9 <span>руб</span></p>
+			<h3 class="big-bold">Отличные новости</h3>
+			<h3 class="red">Самые свежие</h3>
 			<a href="#" class="red-button">
-				заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
+				просмотреть <i class="fa fa-chevron-right" aria-hidden="true"></i>
 			</a>
 			<div class="description-text">
-				<p>Расположитесь комфортно.</p>
-				<p>Отличное качество материалов
-					позволит вам это.</p>
-				<p>Различные цвета</p>
-				<p>высочайший уровень
-					эргономики и прочность.</p>
+				<p>Вчитывайтесь внимательно.</p>
+				<p>Пишите здесь же статьи.</p>
+				<p>Нам очень важно Ваше мнение и видение вопроса.</p>
 			</div>
 		</div>
 	</div>
 
 	<div class="related">
 		<div class="title clearfix">
-			<h2>Похожие продукты</h2>
+			<h2>Похожие новости</h2>
 			<a class="explore" href="#">показать все <img src="{% static 'img/arrow.png' %}" alt=""></a>
 		</div>
-		<div class="related-products clearfix">
-			{% for same_product in same_products %}
+		<div class="related-habr clearfix">
+			{% for same_new in same_habr %}
 			<div class="block">
-				<a href="#"><img src="{% static 'img/' %}{{ same_product.image_src }}"
-						alt="{{ same_product.image_alt }}">
+				<a href="#"><img src="{% static 'img/' %}{{ same_new.image_src }}" alt="{{ same_new.image_alt }}">
 					<div class="text">
 						<img src="{% static 'img/icon-hover.png' %}" alt="img">
-						<h4>{{ same_product.name }}</h4>
-						<p>{{ same_product.desc }} </p>
+						<h4>{{ same_new.name }}</h4>
+						<p>{{ same_new.desc }} </p>
 					</div>
 				</a>
 			</div>
