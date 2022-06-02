@@ -1,0 +1,164 @@
+
+DROP TABLE IF EXISTS `likes`;
+
+CREATE TABLE `likes` (
+`id` BIGINT NOT NULL AUTO_INCREMENT,
+`user_id` BIGINT NOT NULL,
+`published` TINYINT(1) NOT NULL DEFAULT 0 COMMENT "в публикацию\метка для активации в публикацию",
+`article_id` BIGINT NOT NULL,
+`published_at` DATETIME NULL DEFAULT NULL,
+ PRIMARY KEY (`id`)
+);
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` BIGINT NOT NULL auto_increment COMMENT "user id",
+  `first_name` VARCHAR(50) NULL DEFAULT null COMMENT "имя",
+  `last_name` VARCHAR(50) NULL DEFAULT null COMMENT "фамилия",
+  `mobile` VARCHAR(15) null COMMENT "тел",
+  `email` VARCHAR(50) null COMMENT "почта",
+-- `password_hash` VARCHAR(32) NOT NULL COMMENT "хэш для пароля",
+  `registered_at` DATETIME NOT null COMMENT "дата регистрации",
+  `last_login` DATETIME NULL DEFAULT null COMMENT ",sk d gjcktlybq hfp",
+  `about` TEXT NULL DEFAULT null COMMENT "биография\об авторе\о себе",
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uq_mobile` (`mobile` ASC),
+  UNIQUE INDEX `uq_email` (`email` ASC) );
+
+ DROP TABLE IF EXISTS `article`;
+
+ CREATE TABLE `article` (
+  `id` BIGINT NOT NULL auto_increment COMMENT "user id",
+  `author_id` BIGINT NOT null COMMENT "id автора",
+  `parent_id` BIGINT NULL DEFAULT NULL COMMENT "id родительской записи",
+  `title` VARCHAR(75) NOT NULL COMMENT "заголовок",
+  `meta_title` VARCHAR(100) NULL COMMENT "мета тег для seo",
+  `slug` VARCHAR(100) NOT NULL COMMENT "текстовый идентификатор страницы",
+  `summary` TINYTEXT NULL COMMENT "коротко о статье",
+  `published` TINYINT(1) NOT NULL DEFAULT 0 COMMENT "в публикацию\метка для активации в публикацию",
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME NULL DEFAULT NULL,
+  `published_at` DATETIME NULL DEFAULT NULL,
+  `content` TEXT NULL DEFAULT NULL COMMENT "наполнение",
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uq_slug` (`slug` ASC),
+  INDEX `idx_article_user` (`author_id` ASC),
+  CONSTRAINT `fk_article_user`
+    FOREIGN KEY (`author_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+ALTER TABLE `article` 
+ADD INDEX `idx_article_parent` (`parent_id` ASC);
+ALTER TABLE `article` 
+ADD CONSTRAINT `fk_article_parent`
+  FOREIGN KEY (`parent_id`)
+  REFERENCES `article` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+DROP TABLE IF EXISTS `article_review`;
+
+ CREATE TABLE `article_review` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `article_id` BIGINT NOT NULL COMMENT "id статьи",
+  `title` VARCHAR(50) NOT NULL COMMENT "заголовок",
+  `rating` SMALLINT(10) NOT NULL DEFAULT 0 COMMENT "рейтинг",
+  `content` TEXT NULL DEFAULT NULL COMMENT "текст ревью",
+  `published` TINYINT(1) NOT NULL DEFAULT 0 COMMENT "в публикацию\метка для активации в публикацию",
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP(),
+  `published_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idx_review_article` (`article_id`),
+CONSTRAINT `fk_review_article`
+FOREIGN KEY (`article_id`)
+   	REFERENCES `article` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+-- табличка доп инфы по статье, если нужна
+ DROP TABLE IF EXISTS `article_meta`;
+
+ CREATE TABLE `article_meta` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `article_id` BIGINT NOT NULL COMMENT "id родительской статьи",
+  `key` VARCHAR(50) NOT NULL,
+  `content` TEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idx_meta_article` (`article_id` ASC),
+  UNIQUE INDEX `uq_article_meta` (`article_id` ASC, `key` ASC),
+  CONSTRAINT `fk_meta_article`
+    FOREIGN KEY (`article_id`)
+    REFERENCES `article` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `article_comment`;
+
+CREATE TABLE `article_comment` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT "id статьи",
+  `article_id` BIGINT NOT NULL COMMENT "id родительской статьи",
+  `parent_id` BIGINT NULL DEFAULT NULL COMMENT "id родительской записи",
+  `title` VARCHAR(100) NOT NULL COMMENT "заголовок",
+  `published` TINYINT(1) NOT NULL DEFAULT 0 COMMENT "в публикацию\метка для активации в публикацию",
+  `created_at` DATETIME NOT NULL,
+  `published_at` DATETIME NULL DEFAULT NULL,
+  `content` TEXT NULL DEFAULT NULL COMMENT "контент",
+  PRIMARY KEY (`id`),
+  INDEX `idx_comment_article` (`article_id` ASC),
+  CONSTRAINT `fk_comment_article`
+    FOREIGN KEY (`article_id`)
+    REFERENCES `article` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+ALTER TABLE `article_comment` 
+ADD INDEX `idx_comment_parent` (`parent_id` ASC);
+ALTER TABLE `article_comment` 
+ADD CONSTRAINT `fk_comment_parent`
+  FOREIGN KEY (`parent_id`)
+  REFERENCES `article_comment` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+ 
+ CREATE TABLE `category` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `parent_id` BIGINT NULL DEFAULT NULL COMMENT "id родительской записи",
+  `title` VARCHAR(75) NOT NULL COMMENT "заголовок",
+  `meta_title` VARCHAR(100) NULL DEFAULT NULL COMMENT "id родительской записи",
+  `slug` VARCHAR(100) NOT NULL COMMENT "текстовый идентификатор страницы",
+  `content` TEXT NULL DEFAULT NULL COMMENT "контент",
+  PRIMARY KEY (`id`));
+
+ALTER TABLE `category` 
+ADD INDEX `idx_category_parent` (`parent_id` ASC);
+ALTER TABLE `category` 
+ADD CONSTRAINT `fk_category_parent`
+  FOREIGN KEY (`parent_id`)
+  REFERENCES `category` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ CREATE TABLE `article_category` (
+  `article_id` BIGINT NOT NULL COMMENT "id статьи",
+  `category_id` BIGINT NOT NULL COMMENT "id категории",
+  PRIMARY KEY (`articleId`, `category_id`),
+  INDEX `idx_pc_category` (`category_id` ASC),
+  INDEX `idx_pc_article` (`article_id` ASC),
+  CONSTRAINT `fk_pc_article`
+    FOREIGN KEY (`article_id`)
+    REFERENCES `article` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pc_category`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+   
+   
