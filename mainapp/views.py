@@ -29,10 +29,10 @@ def habr(request):
     title = "Новости"
     links_menu = [
         {"href": "habr_all", "name": "Все"},
-        {"href": "habr_home", "name": "ИТ"},
-        {"href": "habr_office", "name": "Языки программирования"},
-        {"href": "habr_modern", "name": "Микроконтроллеры"},
-        {"href": "habr_classic", "name": "Хакерам"},
+        {"href": "habr_it", "name": "ИТ"},
+        {"href": "habr_yaop", "name": "Языки программирования"},
+        {"href": "habr_micro", "name": "Микроконтроллеры"},
+        {"href": "habr_hackers", "name": "Хакерам"},
     ]
     same_habr = [
         {"name": "Отличная новость", "desc": "Не оторваться.",

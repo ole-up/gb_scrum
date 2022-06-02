@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Habr, HabrCategory
+
+admin.site.register(HabrCategory)
+admin.site.register(Habr)
