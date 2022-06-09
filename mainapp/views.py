@@ -4,7 +4,12 @@ from django.shortcuts import render
 
 
 def main(request):
-    title = "главная"
+    title = {
+        "page_title": "Главная",
+        "title_row_1": "ДОБРО ПОЖАЛОВАТЬ НА ПОРТАЛ",
+        "title_row_2": "Наш Хабр"
+    }
+
     habr = [
         {
             "name": "Новости из мира IT",
@@ -26,14 +31,11 @@ def main(request):
 
 
 def habr(request):
-    title = "Новости"
-    links_menu = [
-        {"href": "habr_all", "name": "Все"},
-        {"href": "habr_it", "name": "ИТ"},
-        {"href": "habr_yaop", "name": "Языки программирования"},
-        {"href": "habr_micro", "name": "Микроконтроллеры"},
-        {"href": "habr_hackers", "name": "Хакерам"},
-    ]
+    title = {
+        "page_title": "Главная",
+        "title_row_1": "Наш Хабр",
+        "title_row_2": "Дизайн"
+    }
     same_habr = [
         {"name": "Отличная новость", "desc": "Не оторваться.", "image_src": "", "alt": "..."},
         {"name": "Свежая новость", "desc": "То-то еще будет", "image_src": "", "alt": "..."},
@@ -44,8 +46,8 @@ def habr(request):
             "alt": "...",
         },
     ]
-    content = {"title": title, "links_menu": links_menu, "same_habr": same_habr}
-    return render(request, "mainapp/habr.html", content)
+    content = {"title": title, "same_habr": same_habr}
+    return render(request, "mainapp/blog_list.html", content)
 
 
 def help(request):
