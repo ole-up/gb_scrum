@@ -7,7 +7,8 @@ import mainapp.views as mainapp
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", mainapp.main, name="main"),
+    #path("", mainapp.main, name="main"),
+    path("", mainapp.index),
     path("design/", mainapp.habr, name="design"),
     path("web/", mainapp.habr, name="web"),
     path("mobile/", mainapp.habr, name="mobile"),
