@@ -14,6 +14,7 @@ urlpatterns = [
     path("marketing/", mainapp.habr, name="marketing"),
     path("help/", mainapp.help, name="help"),
     path("personal/", include("personalapp.urls", namespace='personal')),
+    path('summernote/', include('django_summernote.urls')),
     ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

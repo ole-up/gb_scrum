@@ -1,4 +1,10 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+
+from mainapp.models import Habr
+from personalapp.forms import ArticleForm
+
 
 def main(request):
     title = {
@@ -26,3 +32,18 @@ def articles(request):
     }
     content = {"title": title}
     return render(request, "personalapp/my_articles.html", content)
+
+class ArticleCreateView(CreateView):
+    model = Habr
+    template_name = 'personalapp/create_article.html'
+    form_class = ArticleForm
+    success_url = reverse_lazy('personal:articles')
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticleCreateView, self).get_context_data(**kwargs)
+        context['title'] = {
+        "page_title": "Личный кабинет",
+        "title_row_1": "Наш Хабр",
+        "title_row_2": "Личный кабинет"
+    }
+        return context

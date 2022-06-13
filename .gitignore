@@ -253,3 +253,4 @@ fabric.properties
 # others
 /.vscode/
 .idea
+/media/

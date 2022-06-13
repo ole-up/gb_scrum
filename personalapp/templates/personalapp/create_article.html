@@ -1,0 +1,54 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{{ form.media }}
+
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'personalapp/includes/inc_left_menu.html' %}
+        <div class="col-md-10">
+            <h2 class="blog-title text-center">Создание статьи</h2>
+            <br>
+            <form>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="InputArticleTitle">Заголовок статьи</label>
+                        {{ form.name }}
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="ArticleCategory">Раздел</label>
+                        {{ form.category }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="InputFile">Фотография для превью статьи:</label>
+                        {{ form.image }}
+                        <p class="help-block">Загрузите файл с фотографией для превью</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="InputShortDesc">Краткое содержание статьи:</label>
+                        {{ form.short_desc }}
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="InputDescription">Содержание статьи</label>
+                        {{ form.description | safe }}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
