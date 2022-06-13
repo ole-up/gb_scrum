@@ -1,0 +1,51 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'personalapp/includes/inc_left_menu.html' %}
+        <div class="col-md-10">
+            <h2 class="blog-title text-center">Мои статьи</h2>
+            <br>
+             <button type="button" class="btn btn-info">Создать статью</button>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Тема статьи</th>
+                    <th>Дата создания</th>
+                    <th>Публикация</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td><a href="">Material дизайн в вебе</a></td>
+                    <td>24-01-2022</td>
+                    <td><button type="button" class="btn-sm btn-success">Опубликовать</button></td>
+                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td><a href="">Будущее СSS</a></td>
+                    <td>01-01-2022</td>
+                    <td><button type="button" class="btn-sm btn-success">Опубликовать</button></td>
+                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td><a href="">Новый маркетинг</a></td>
+                    <td>30-01-2022</td>
+                    <td><button type="button" class="btn-sm btn-danger">Снять с публикации</button></td>
+                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+
+{% endblock %}
