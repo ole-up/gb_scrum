@@ -12,7 +12,8 @@
         <div class="col-md-10">
             <h2 class="blog-title text-center">Создание статьи</h2>
             <br>
-            <form>
+            <form action="{% url 'personal:articles_create' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
 
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -20,7 +21,7 @@
                         {{ form.name }}
                     </div>
                 </div>
-                 <div class="row">
+                <div class="row">
                     <div class="form-group col-md-12">
                         <label for="ArticleCategory">Раздел</label>
                         {{ form.category }}
