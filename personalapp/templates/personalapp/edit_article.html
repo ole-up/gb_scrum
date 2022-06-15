@@ -1,0 +1,55 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{{ form.media }}
+
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'personalapp/includes/inc_left_menu.html' %}
+        <div class="col-md-10">
+            <h2 class="blog-title text-center">Редактирование статьи</h2>
+            <br>
+            <form action="{% url 'personal:articles_update' habr.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="{{ form.name.id_for_label }}">Заголовок статьи</label>
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="{{ form.category.id_for_label }}">Раздел</label>
+                        {{ form.category }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="{{ form.image.id_for_label }}">Фотография для превью статьи:</label>
+                        {{ form.image }}
+                        <p class="help-block">Загрузите файл с фотографией для превью</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="{{ form.short_desc.id_for_label }}">Краткое содержание статьи:</label>
+                        {{ form.short_desc }}
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="{{ form.description.id_for_label }}">Содержание статьи</label>
+                        {{ form.description | safe }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Сохранить</button>
+                <button  type="button" class="btn btn-danger"><a href="{% url 'personal:articles' %}">Отменить</a></button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

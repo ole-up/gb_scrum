@@ -1,0 +1,52 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'personalapp/includes/inc_left_menu.html' %}
+        <div class="col-md-10">
+            <h2 class="blog-title text-center">Уведомления</h2>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Тема сообщения</th>
+                    <th>Пользователь</th>
+                    <th>Дата</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td><a href="">Ваша статья попала в Топ-10 дня!</a></td>
+                    <td>Администратор</td>
+                    <td>24-01-2022</td>
+                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td><a href="">Ваша статья опубликована</a></td>
+                    <td>Модератор</td>
+                    <td>01-01-2022</td>
+                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td><a href="">Вас заблокировали на 2 недели</a></td>
+                    <td>Модератор</td>
+                    <td>30-01-2022</td>
+                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}

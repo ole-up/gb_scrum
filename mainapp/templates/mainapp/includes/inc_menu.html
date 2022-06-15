@@ -1,19 +1,69 @@
-<a href="/" class="logo"></a>
-<ul class="menu">
-    <li>
-        <a href="{% url 'main' %}" class="{% if request.resolver_match.url_name == 'main' %}active{% endif %}">
-            Главная
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'habr' %}" class="{% if request.resolver_match.url_name == 'habr' %}active{% endif %}">
-            Хабр
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'help' %}" class="{% if request.resolver_match.url_name == 'help' %}active{% endif %}">
-            Помощь
-        </a>
-    </li>
-</ul>
-<a href="#" class="search"></a>
+<header class="site-header">
+    <nav class="navbar navbar-default navbar-intimate role=" data-offset-top="50" data-spy="affix">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-target="#navigation" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="logo">
+                    <a class="navbar-brand" href=""><i class="ico-3dglasses"></i></a>
+                </div>
+            </div>
+            <div class="side">
+                <a class="show-search"><i class="ico-search"></i></a>
+            </div>
+            <form class="full-search">
+                <div class="container">
+                    <div class="row">
+                        <input class="form-control" placeholder="Search" type="text">
+                        <a class="close-search">
+                            <span class="ico-times"></span>
+                        </a>
+                    </div>
+                </div>
+            </form>
+            <div class="navbar-collapse collapse" id="navigation">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="/">Главная</a>
+                    </li>
+                    <li>
+                        <a href="/design/">Дизайн</a>
+                    </li>
+                    <li>
+                        <a href="/web/">Веб-разработка</a>
+                    </li>
+                    <li>
+                        <a href="/mobile/">Мобильная разработка</a>
+                    </li>
+                    <li>
+                        <a href="/marketing/">Маркетинг</a>
+                    </li>
+                    <li>
+                        <a href="/login/"><i class="ico-user"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <ul class="wpb-mobile-menu">
+        <li class="active">
+            <a href="">Главная</a>
+        </li>
+        <li>
+            <a href="">Дизайн</a>
+        </li>
+        <li>
+            <a href="">Веб-разработка</a>
+        </li>
+        <li>
+            <a href="">Мобильная разработка</a>
+        </li>
+        <li>
+            <a href="">Маркетинг</a>
+        </li>
+    </ul>
+</header>

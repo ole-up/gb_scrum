@@ -249,3 +249,9 @@ fabric.properties
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# others
+/.vscode/
+.idea
+/media/
+/linux_venv/
