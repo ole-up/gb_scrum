@@ -10,9 +10,9 @@
     <div class="container">
         {% include 'personalapp/includes/inc_left_menu.html' %}
         <div class="col-md-10">
-            <h2 class="blog-title text-center">Создание статьи</h2>
+            <h2 class="blog-title text-center">Редактирование статьи</h2>
             <br>
-            <form action="{% url 'personal:articles_create' %}" method="post" enctype="multipart/form-data">
+            <form action="{% url 'personal:articles_update' habr.id %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div class="row">
@@ -46,7 +46,6 @@
                         {{ form.description | safe }}
                     </div>
                 </div>
-
                 <button type="submit" class="btn btn-success">Сохранить</button>
                 <button  type="button" class="btn btn-danger"><a href="{% url 'personal:articles' %}">Отменить</a></button>
             </form>

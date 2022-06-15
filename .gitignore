@@ -254,3 +254,4 @@ fabric.properties
 /.vscode/
 .idea
 /media/
+/linux_venv/
