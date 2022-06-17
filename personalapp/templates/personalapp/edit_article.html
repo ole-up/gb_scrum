@@ -8,8 +8,7 @@
 
 {% block content %}
     <div class="container">
-        {% include 'personalapp/includes/inc_left_menu.html' %}
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h2 class="blog-title text-center">Редактирование статьи</h2>
             <br>
             <form action="{% url 'personal:articles_update' habr.id %}" method="post" enctype="multipart/form-data">

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'django_summernote',
     "mainapp",
-    "personalapp"
+    "personalapp",
+    'authapp',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+AUTH_USER_MODEL = 'authapp.CustomUser'
+
+LOGIN_URL = '/auth/login/'

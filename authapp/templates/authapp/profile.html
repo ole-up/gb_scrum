@@ -1,0 +1,67 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-12">
+            <h2 class="blog-title text-center">Профиль пользователя</h2>
+            <br>
+            <form action="{% url 'auth:profile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group">
+                        <label for="{{ user_form.avatar.id_for_label }}">Ваша фотография:</label>
+                        <div class="space"></div>
+                        <div class="portfolio col-md-2">
+                            <img alt="" src="{% get_media_prefix %}{{ user_form.avatar.value }}">
+                        </div>
+                         <div class="space"></div>
+                        {{ user_form.avatar }}
+                        <p class="help-block">Загрузите файл со своей фотографией</p>
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="{{ user_form.first_name.id_for_label }}">Имя</label>
+                        {{ user_form.first_name }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="{{ user_form.last_name.id_for_label }}">Фамилия</label>
+                        {{ user_form.last_name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="{{ user_form.email.id_for_label }}">E-mail</label>
+                        {{ user_form.email }}
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="{{ user_form.age.id_for_label }}">Возраст</label>
+                        {{ user_form.age }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-2">
+                        <label for="{{ profile_form.gender.id_for_label }}">Пол</label>
+                        {{ profile_form.gender }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="{{ profile_form.aboutMe.id_for_label }}">О себе</label>
+                        {{ profile_form.aboutMe }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Сохранить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
