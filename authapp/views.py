@@ -6,7 +6,7 @@ from django.db import transaction
 from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm, RegisterForm, UpdateForm, CustomUserProfileEditForm
-from .models import CustomUser
+from mainapp.models import ArticleCategory
 
 
 def login(request: HttpRequest):
@@ -31,6 +31,7 @@ def login(request: HttpRequest):
     context = {
         'title': title,
         'form': form,
+        'categories': ArticleCategory.objects.all()
     }
     return render(request, 'authapp/login.html', context)
 
@@ -67,7 +68,8 @@ def register(request: HttpRequest):
 
     context = {
         'title': title,
-        'form': form
+        'form': form,
+        'categories': ArticleCategory.objects.all()
     }
 
     return render(request, 'authapp/register.html', context)
@@ -99,6 +101,7 @@ def edit_profile(request: HttpRequest):
         'title': title,
         'user_form': user_form,
         'profile_form': profile_form,
+        'categories': ArticleCategory.objects.all()
     }
 
     return render(request, 'authapp/profile.html', context)

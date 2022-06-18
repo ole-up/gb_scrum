@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 
-from mainapp.models import Habr
+from mainapp.models import Article, ArticleCategory
 from personalapp.forms import ArticleForm
 
 
@@ -12,7 +12,8 @@ def main(request):
         "title_row_1": "Наш Хабр",
         "title_row_2": "Личный кабинет"
     }
-    content = {"title": title}
+    content = {"title": title,
+               'categories': ArticleCategory.objects.all()}
     return render(request, "personalapp/personal.html", content)
 
 
@@ -22,12 +23,13 @@ def articles(request):
         "title_row_1": "Наш Хабр",
         "title_row_2": "Личный кабинет"
     }
-    content = {"title": title}
+    content = {"title": title,
+               'categories': ArticleCategory.objects.all()}
     return render(request, "personalapp/my_articles.html", content)
 
 
 class ArticleCreateView(CreateView):
-    model = Habr
+    model = Article
     template_name = 'personalapp/create_article.html'
     form_class = ArticleForm
     success_url = reverse_lazy('personal:articles')
@@ -39,6 +41,7 @@ class ArticleCreateView(CreateView):
             "title_row_1": "Наш Хабр",
             "title_row_2": "Личный кабинет"
         }
+        context['categories'] = ArticleCategory.objects.all()
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -46,7 +49,7 @@ class ArticleCreateView(CreateView):
 
 
 class ArticleUpdateView(UpdateView):
-    model = Habr
+    model = Article
     template_name = 'personalapp/edit_article.html'
     form_class = ArticleForm
     success_url = reverse_lazy('personal:articles')
@@ -58,6 +61,7 @@ class ArticleUpdateView(UpdateView):
             "title_row_1": "Наш Хабр",
             "title_row_2": "Личный кабинет"
         }
+        context['categories'] = ArticleCategory.objects.all()
         return context
 
     def dispatch(self, request, *args, **kwargs):

@@ -2,7 +2,7 @@ from django.forms import ModelForm, ImageField, FileInput
 from django_summernote.fields import SummernoteTextField
 from django_summernote.widgets import SummernoteWidget
 
-from mainapp.models import Habr
+from mainapp.models import Article
 
 
 class ArticleForm(ModelForm):
@@ -10,8 +10,8 @@ class ArticleForm(ModelForm):
     image = ImageField(widget=FileInput(), required=True)
 
     class Meta:
-        model = Habr
-        fields = ('category', 'image', 'name', 'short_desc', 'description')
+        model = Article
+        fields = ('category', 'image', 'title', 'description')
         widgets = {
             'description': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '600px'}}),
                  }

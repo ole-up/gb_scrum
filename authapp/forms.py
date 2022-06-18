@@ -101,7 +101,7 @@ class CustomUserProfileEditForm(forms.ModelForm):
     gender = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=GENDER_CHOICES)
     class Meta:
         model = CustomUserProfile
-        fields = ('aboutMe', 'gender')
+        fields = ('about_me', 'gender')
 
     def __init__(self, *args, **kwargs):
         super(CustomUserProfileEditForm, self).__init__(*args, **kwargs)

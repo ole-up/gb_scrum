@@ -28,20 +28,16 @@
             <div class="navbar-collapse collapse" id="navigation">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active">
-                        <a href="{% url 'main' %}">Главная</a>
+                        <a href="{% url 'mainapp:index' %}">Главная</a>
                     </li>
-                    <li>
-                        <a href="{% url 'design' %}">Дизайн</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'web' %}">Веб-разработка</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'mobile' %}">Мобильная разработка</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'marketing' %}">Маркетинг</a>
-                    </li>
+                    {% for category in categories %}
+                        {% if not category.is_deleted %}
+                            <li>
+                                <a href="{% url 'mainapp:articles' category.id %}">{{ category.name }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
                     {% if user.is_authenticated %}
                         <li class="dropdown dropdown-toggle">
                             <a data-toggle="dropdown" href="{% url 'personal:main' %}" aria-expanded="false"><i

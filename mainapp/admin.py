@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Habr, HabrCategory
+from .models import Article, ArticleCategory
 
-admin.site.register(HabrCategory)
-admin.site.register(Habr)
+admin.site.register(ArticleCategory)
+admin.site.register(Article)

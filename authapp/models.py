@@ -23,6 +23,9 @@ class CustomUser(AbstractUser):
         self.is_active = False
         self.save()
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
 
 class CustomUserProfile(models.Model):
     MALE = 'M'
@@ -34,7 +37,7 @@ class CustomUserProfile(models.Model):
     )
 
     user = models.OneToOneField(CustomUser, unique=True, null=False, db_index=True, on_delete=models.CASCADE)
-    aboutMe = models.TextField(verbose_name='о себе', max_length=512, blank=True)
+    about_me = models.TextField(verbose_name='о себе', max_length=512, blank=True)
     gender = models.CharField(verbose_name='пол', max_length=1, choices=GENDER_CHOICES, blank=True)
 
     @receiver(post_save, sender=CustomUser)

@@ -1,0 +1,301 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="single-post" id="content">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-8">
+
+        <article class="single-post-content">
+            <h2 class="page-title">{{ article.title }}</h2>
+            <div class="entry-meta">
+                <span class="meta-part"><i class="ico-user"></i><a href="#">{{ article.author }}</a></span>
+                <span class="meta-part"><i class="ico-calendar-alt-fill"></i><a
+                        href="#">{{ article.edit_date|date:"d F o" }}</a></span>
+                <span class="meta-part"><i class="ico-comments"></i> <a href="#">20</a></span>
+                <span class="meta-part"><i class="ico-tag"></i> <a href="#">{{ article.category }}</a></span>
+                <span class="meta-part"><i class="ico-star"></i><a href="#">7.5</a></span>
+            </div>
+            <div class="space"></div>
+            {{ article.description|safe}}
+        </article>
+
+
+        <article>
+
+            <div id="comments">
+                <ol class="comments-list">
+                    <li>
+                        <div class="comment-box clearfix">
+                            <div class="avatar">
+                                <a href="./article.html"><img alt=""
+                                                              src="{% static 'img/blog/user1.jpg.jpeg' %}"></a>
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-meta">
+                                    <h4 class="comment-by"><a href="./article.html">Anna Ostyankoa</a></h4>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet,
+                                    consectetur adipisicing elit, sed
+                                    do eiusmod tempor incididunt ut
+                                    labore et dolore magna aliqua. Ut
+                                    enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi
+                                    ut aliquip ex ea commodo
+                                    consequat.</p><a class="reply-link" href="./article.html">Reply</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>
+                                <div class="comment-box clearfix">
+                                    <div class="avatar">
+                                        <a href="./article.html"><img alt=""
+                                                                      src="{% static 'img/blog/user2.jpg.jpeg' %}"></a>
+                                    </div>
+                                    <div class="comment-content">
+                                        <div class="comment-meta">
+                                            <h4 class="comment-by">
+                                                <a href="./article.html">Anna Ostyankoa</a></h4>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit
+                                            amet, consectetur
+                                            adipisicing elit, sed do
+                                            eiusmod tempor incididunt
+                                            ut labore et dolore magna
+                                            aliqua. Ut enim ad minim
+                                            veniam, quis nostrud
+                                            exercitation ullamco
+                                            laboris nisi ut aliquip ex
+                                            ea commodo
+                                            consequat.</p><a class="reply-link"
+                                                             href="./article.html">Reply</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="comment-box clearfix">
+                                    <div class="avatar">
+                                        <a href="./article.html"><img alt=""
+                                                                      src="{% static 'img/blog/user2.jpg.jpeg' %}"></a>
+                                    </div>
+                                    <div class="comment-content">
+                                        <div class="comment-meta">
+                                            <h4 class="comment-by">
+                                                <a href="./article.html">Anna
+                                                    Ostyankoa</a></h4>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit
+                                            amet, consectetur
+                                            adipisicing elit, sed do
+                                            eiusmod tempor incididunt
+                                            ut labore et dolore magna
+                                            aliqua. Ut enim ad minim
+                                            veniam, quis nostrud
+                                            exercitation ullamco
+                                            laboris nisi ut aliquip ex
+                                            ea commodo
+                                            consequat.</p><a class="reply-link"
+                                                             href="./article.html">Reply</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="comment-box clearfix">
+                            <div class="avatar">
+                                <a href="./article.html"><img alt=""
+                                                              src="{% static 'img/blog/user4.jpg.jpeg' %}"></a>
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-meta">
+                                    <h4 class="comment-by"><a href="./article.html">Anna Ostyankoa</a></h4>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet,
+                                    consectetur adipisicing elit, sed
+                                    do eiusmod tempor incididunt ut
+                                    labore et dolore magna aliqua. Ut
+                                    enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi
+                                    ut aliquip ex ea commodo
+                                    consequat.</p><a class="reply-link" href="./article.html">Reply</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="comment-box clearfix">
+                            <div class="avatar">
+                                <a href="./article.html"><img alt=""
+                                                              src="{% static 'img/blog/user4.jpg.jpeg' %}"></a>
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-meta">
+                                    <h4 class="comment-by"><a href="./article.html">Anna Ostyankoa</a></h4>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet,
+                                    consectetur adipisicing elit, sed
+                                    do eiusmod tempor incididunt ut
+                                    labore et dolore magna aliqua. Ut
+                                    enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi
+                                    ut aliquip ex ea commodo
+                                    consequat.</p><a class="reply-link" href="./article.html">Reply</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="comment-box clearfix">
+                            <div class="avatar">
+                                <a href="./article.html"><img alt=""
+                                                              src="{% static 'img/blog/user4.jpg.jpeg' %}"></a>
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-meta">
+                                    <h4 class="comment-by"><a href="./article.html">Anna Ostyankoa</a></h4>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet,
+                                    consectetur adipisicing elit, sed
+                                    do eiusmod tempor incididunt ut
+                                    labore et dolore magna aliqua. Ut
+                                    enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi
+                                    ut aliquip ex ea commodo
+                                    consequat.</p><a class="reply-link" href="./article.html">Reply</a>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </article>
+
+        <article>
+
+            <div id="respond">
+                <h2 class="respond-title">Add Comment</h2>
+                <form action="./article.html">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="form-control" id="author" name="author" placeholder="Name"
+                                   size="30"
+                                   type="text" value="">
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" id="email" name="author" placeholder="Email"
+                                   size="30"
+                                   type="text" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                                    <textarea class="form-control" cols="45" id="comment" name="comment"
+                                              placeholder="Comment" rows="8"></textarea> <a
+                                class="btn btn-common btn-more" id="submit" type="submit"><i
+                                class="fa fa-check"></i> Submit Comment</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <article>
+            <div class="relate-post">
+                <h4>Releate Post</h4>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <ul class="posts-list">
+                            <li>
+                                <div class="widget-thumb">
+                                    <a href="./article.html"><img alt=""
+                                                                  src="{% static 'img/post/post1.jpg.jpeg' %}"></a>
+                                </div>
+                                <div class="widget-content">
+                                    <a href="./article.html">Aladdin rides
+                                        'magic carpet' at New York in
+                                        Halloween prank</a>
+                                    <div class="meta">
+                                        <span><i class="ico-calendar-alt-fill"></i> October 7,2015</span>
+                                        <span><i class="ico-tag"></i> Technology</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="posts-list">
+                            <li>
+                                <div class="widget-thumb">
+                                    <a href="./article.html"><img alt=""
+                                                                  src="{% static 'img/post/post2.jpg.jpeg' %}"></a>
+                                </div>
+                                <div class="widget-content">
+                                    <a href="./article.html">New Zealand makes
+                                        history by winning third Rugby
+                                        WC</a>
+                                    <div class="meta">
+                                        <span><i class="ico-calendar-alt-fill"></i> October 7,2015</span>
+                                        <span><i class="ico-tag"></i>Technology</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="posts-list">
+                            <li>
+                                <div class="widget-thumb">
+                                    <a href="./article.html"><img alt=""
+                                                                  src="{% static 'img/post/post3.jpg.jpeg' %}"></a>
+                                </div>
+                                <div class="widget-content">
+                                    <a href="./article.html">Romania calls for 3
+                                        days of mourning after
+                                        nightclub fire kills at least
+                                        27</a>
+                                    <div class="meta">
+                                        <span><i class="ico-calendar-alt-fill"></i>October 7,2015</span>
+                                        <span><i class="ico-tag"></i>Technology</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="posts-list">
+                            <li>
+                                <div class="widget-thumb">
+                                    <a href="./article.html"><img alt=""
+                                                                  src="{% static 'img/post/post4.jpg.jpeg' %}"></a>
+                                </div>
+                                <div class="widget-content">
+                                    <a href="./article.html">3 years of 'Star
+                                        Wars Episode VII' fandom,
+                                        celebrated</a>
+                                    <div class="meta">
+                                        <span><i class="ico-calendar-alt-fill"></i>October 7,2015</span>
+                                        <span><i class="ico-tag"></i>Technology</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+
+
+{% endblock %}
+{% block sidebar %}
+    {% include 'mainapp/includes/inc_sidebar.html' %}
+{% endblock sidebar %}
