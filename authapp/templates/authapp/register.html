@@ -7,6 +7,14 @@
 
 {% block content %}
     <div class="row">
+        {% if form.errors %}
+            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                {{ form.errors|escape }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
         <div class="col-md-10 col-md-offset-1 contact-form">
             <form class="shake" data-toggle="validator" id="registerForm" name="registerForm" role="form"
                   action="{% url 'auth:register' %}" method="post">
@@ -16,13 +24,11 @@
                         <div class="form-group">
                             <label class="small mb-1" for="{{ form.username.id_for_label }}">Логин:</label>
                             {{ form.username }}
-                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label class="small mb-1" for="{{ form.email.id_for_label }}">E-mail:</label>
                         {{ form.email }}
-                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -30,13 +36,11 @@
                         <div class="col-md-6">
                             <label class="small mb-1" for="{{ form.password1.id_for_label }}">Пароль:</label>
                             {{ form.password1 }}
-                            <div class="help-block with-errors"></div>
                         </div>
                         <div class="col-md-6">
                             <label class="small mb-1" for="{{ form.password2.id_for_label }}">Подтвердите
                                 пароль:</label>
                             {{ form.password2 }}
-                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                 </div>
@@ -50,7 +54,6 @@
                         <div class="col-md-6">
                             <label class="small mb-1" for="{{ form.first_name.id_for_label }}">Имя:</label>
                             {{ form.first_name }}
-                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                 </div>
@@ -59,12 +62,11 @@
                         <div class="col-md-2">
                             <label class="small mb-1" for="{{ form.age.id_for_label }}">Возраст:</label>
                             {{ form.age }}
-                            <div class="help-block with-errors"></div>
                         </div>
+
                         <div class="col-md-10">
                             <label class="small mb-1" for="{{ form.avatar.id_for_label }}">Аватар:</label>
                             {{ form.avatar }}
-                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
                 </div>

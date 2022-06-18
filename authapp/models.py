@@ -9,7 +9,7 @@ from django.dispatch import receiver
 class CustomUser(AbstractUser):
 
     age = models.PositiveIntegerField(verbose_name='возраст', default=18)
-    avatar = models.ImageField(upload_to='users_avatar', blank=True)
+    avatar = models.ImageField(upload_to='users_avatars', blank=True)
     activation_key = models.CharField(max_length=128, blank=True)
     activation_key_expires = models.DateTimeField(default=(now() + timedelta(hours=48)))
 
@@ -23,13 +23,13 @@ class CustomUser(AbstractUser):
         self.is_active = False
         self.save()
 
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+    # def __str__(self):
+    #     return f'{self.first_name} {self.last_name}'
 
 
 class CustomUserProfile(models.Model):
     MALE = 'M'
-    FEMALE = 'W'
+    FEMALE = 'F'
 
     GENDER_CHOICES = (
         (MALE, 'М'),

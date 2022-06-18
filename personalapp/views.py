@@ -36,6 +36,10 @@ class ArticleCreateView(CreateView):
     form_class = ArticleForm
     success_url = reverse_lazy('personal:articles')
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         context = super(ArticleCreateView, self).get_context_data(**kwargs)
         context['title'] = {
@@ -55,6 +59,10 @@ class ArticleUpdateView(UpdateView):
     template_name = 'personalapp/edit_article.html'
     form_class = ArticleForm
     success_url = reverse_lazy('personal:articles')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super(ArticleUpdateView, self).get_context_data(**kwargs)

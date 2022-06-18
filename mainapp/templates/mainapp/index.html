@@ -10,14 +10,14 @@
     {% for article in articles %}
         <article>
             <div class="blog-item-wrap">
-                <h2 class="blog-title"><a href="article.html">{{ article.title }}</a></h2>
+                <h2 class="blog-title"><a href="{% url 'mainapp:article' article.id %}">{{ article.title }}</a></h2>
                 <div class="entry-meta">
-                    <span class="meta-part"><i class="ico-user"></i><a href="./index.html">{{ article.author}}</a></span>
+                    <span class="meta-part"><i class="ico-user"></i><a href="./index.html"> {{ article.author}}</a></span>
                     <span class="meta-part"><i class="ico-calendar-alt-fill"></i><a
-                            href="./index.html">{{ article.edit_date|date:"d F o" }}</a></span>
-                    <span class="meta-part"><i class="ico-comments"></i><a href="./index.html">20</a></span>
-                    <span class="meta-part"><i class="ico-tag"></i><a href="{% url 'mainapp:article' article.category.id %}">{{ article.category }}</a></span>
-                    <span class="meta-part"><i class="ico-star"></i><a href="./index.html">7.5</a></span>
+                            href="./index.html"> {{ article.edit_date|date:"d F o" }}</a></span>
+{#                    <span class="meta-part"><i class="ico-comments"></i><a href="./index.html">20</a></span>#}
+                    <span class="meta-part"><i class="ico-tag"></i><a href="{% url 'mainapp:articles' article.category.id %}"> {{ article.category }}</a></span>
+{#                    <span class="meta-part"><i class="ico-star"></i><a href="./index.html">7.5</a></span>#}
                 </div>
 
                 <div class="feature-inner">

@@ -18,15 +18,16 @@
                         <label for="{{ user_form.avatar.id_for_label }}">Ваша фотография:</label>
                         <div class="space"></div>
                         <div class="portfolio col-md-2">
-                            <img alt="" src="{% get_media_prefix %}{{ user_form.avatar.value }}">
+                            <img alt="" src="{{ user.avatar.url }}">
                         </div>
-                         <div class="space"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="space"></div>
                         {{ user_form.avatar }}
                         <p class="help-block">Загрузите файл со своей фотографией</p>
                     </div>
-
                 </div>
-                <br>
+                <div class="space"></div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="{{ user_form.first_name.id_for_label }}">Имя</label>
@@ -49,6 +50,10 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="{{ user_form.username.id_for_label }}">Логин</label>
+                        {{ user_form.username }}
+                    </div>
                     <div class="form-group col-md-2">
                         <label for="{{ profile_form.gender.id_for_label }}">Пол</label>
                         {{ profile_form.gender }}

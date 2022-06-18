@@ -59,6 +59,8 @@ class RegisterForm(UserCreationForm):
         user.is_active = False
         salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
         user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
+        if commit:
+            user.save()
         return user
 
 
@@ -96,7 +98,7 @@ class UpdateForm(UserChangeForm):
 
 
 class CustomUserProfileEditForm(forms.ModelForm):
-    GENDER_CHOICES = [('W', 'Ж'),
+    GENDER_CHOICES = [('F', 'Ж'),
                       ('M', 'М'),]
     gender = forms.ChoiceField(widget=forms.RadioSelect, required=False, choices=GENDER_CHOICES)
     class Meta:

@@ -62,7 +62,6 @@ def register(request: HttpRequest):
             else:
                 print('ошибка отправки')
             return HttpResponseRedirect(reverse('auth:login'))
-
     else:
         form = RegisterForm()
 
@@ -89,9 +88,13 @@ def edit_profile(request: HttpRequest):
         profile_form = CustomUserProfileEditForm(data=request.POST, instance=request.user.customuserprofile)
 
         if user_form.is_valid() and profile_form.is_valid():
+            print('формы валидны')
             user_form.save()
             profile_form.save()
             return HttpResponseRedirect(reverse('auth:profile'))
+        else:
+            print(profile_form.errors)
+            print(user_form.errors)
 
     else:
         user_form = UpdateForm(instance=request.user)

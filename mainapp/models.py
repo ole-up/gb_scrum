@@ -15,7 +15,7 @@ class ArticleCategory(models.Model):
 class Article(models.Model):
     category = models.ForeignKey(ArticleCategory, on_delete=models.CASCADE)
     author = models.ForeignKey(CustomUser, null=False, on_delete=models.CASCADE)
-    title = models.CharField(verbose_name="Заголовок", max_length=70)
+    title = models.CharField(verbose_name="Заголовок", max_length=150)
     image = models.ImageField(upload_to="article_images", blank=True)
     description = models.TextField(verbose_name="Содержание", blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
