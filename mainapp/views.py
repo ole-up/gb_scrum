@@ -2,6 +2,8 @@ import datetime
 
 from django.shortcuts import render
 from .models import HabrCategory, Habr
+from django.core.paginator import Paginator
+
 
 def main(request):
     title = {
@@ -64,14 +66,29 @@ def help(request):
     content = {"title": title, "visit_date": visit_date, "locations": locations}
     return render(request, "mainapp/help.html", content)
 
+# def index(request):
+#     articles = Habr.objects.all()
+#     categories = HabrCategory.objects.all()
+#     return render(request, 'mainapp/index.html', context={'articles': articles,
+#                                                           'categories': categories})
+
+def get_category(request, category_id):
+    articles = Habr.objects.filter(category_id=category_id)
+    categories = HabrCategory.objects.all()
+    paginator = Paginator(articles, 3)
+    page_num = request.GET.get('page', 1)
+    page_objects = paginator.get_page(page_num)
+    category = HabrCategory.objects.get(pk=category_id)
+    return render(request, template_name='mainapp/category.html', context={'page_obj': page_objects,
+                                                                           'articles': articles,
+                                                                           'categories': categories,
+                                                                           'category': category})
+
 def index(request):
     articles = Habr.objects.all()
     categories = HabrCategory.objects.all()
-    return render(request, 'mainapp/index.html', context={'articles': articles,
-                                                          'categories': categories})
-
-"""def get_category(request, category_id):
-    articles = Habr.objects.filter(category_id=category_id)
-    categories = HabrCategory.objects.all()
-    category = HabrCategory.objects.get(pk=category_id)
-    return render(request, template_name=)"""
+    paginator = Paginator(articles, 3)
+    page_num = request.GET.get('page', 1)
+    page_objects = paginator.get_page(page_num)
+    return render(request, template_name='mainapp/test.html', context={'page_obj': page_objects,
+                                                                       'categories': categories})

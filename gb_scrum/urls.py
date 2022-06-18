@@ -2,13 +2,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-
+from mainapp.views import get_category
 import mainapp.views as mainapp
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     #path("", mainapp.main, name="main"),
     path("", mainapp.index),
+    path('category/<int:category_id>/', get_category),
+    #path('test/', mainapp.test, name='test'),
     path("design/", mainapp.habr, name="design"),
     path("web/", mainapp.habr, name="web"),
     path("mobile/", mainapp.habr, name="mobile"),
