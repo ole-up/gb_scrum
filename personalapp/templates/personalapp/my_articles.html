@@ -9,7 +9,7 @@
     <div class="container">
         <div class="col-md-12">
             <h2 class="blog-title text-center">Мои статьи</h2>
-            <br>
+            <div class="space"></div>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -21,34 +21,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td><a href="">Material дизайн в вебе</a></td>
-                    <td>24-01-2022</td>
+                {% for article in articles %}
+                 <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><a href="{% url 'personal:articles_update' article.id %}">{{ article.title }}</a></td>
+                    <td>{{ article.create_date }}</td>
                     <td>
                         <button type="button" class="btn-sm btn-success">Опубликовать</button>
                     </td>
                     <td><a href=""><i class="ico-circle-cross"></i></a></td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td><a href="">Будущее СSS</a></td>
-                    <td>01-01-2022</td>
-                    <td>
-                        <button type="button" class="btn-sm btn-success">Опубликовать</button>
-                    </td>
-                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><a href="">Новый маркетинг</a></td>
-                    <td>30-01-2022</td>
-                    <td>
-                        <button type="button" class="btn-sm btn-danger">Снять с публикации</button>
-                    </td>
-                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
-                </tr>
-                </tbody>
+                {% endfor %}
+               </tbody>
             </table>
         </div>
         <div class="col-md-12">

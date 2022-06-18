@@ -11,13 +11,13 @@
         <div class="col-md-12">
             <h2 class="blog-title text-center">Редактирование статьи</h2>
             <br>
-            <form action="{% url 'personal:articles_update' habr.id %}" method="post" enctype="multipart/form-data">
+            <form action="{% url 'personal:articles_update' article.id %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label for="{{ form.name.id_for_label }}">Заголовок статьи</label>
-                        {{ form.name }}
+                        {{ form.title }}
                     </div>
                 </div>
                 <div class="row">

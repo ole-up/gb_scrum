@@ -18,12 +18,14 @@ def main(request):
 
 
 def articles(request):
+    user_articles = Article.objects.filter(author=request.user)
     title = {
         "page_title": "Личный кабинет",
         "title_row_1": "Наш Хабр",
         "title_row_2": "Личный кабинет"
     }
     content = {"title": title,
+               'articles': user_articles,
                'categories': ArticleCategory.objects.all()}
     return render(request, "personalapp/my_articles.html", content)
 
