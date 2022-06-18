@@ -17,7 +17,7 @@
         {% endif %}
         <div class="col-md-10 col-md-offset-1 contact-form">
             <form class="shake" data-toggle="validator" id="registerForm" name="registerForm" role="form"
-                  action="{% url 'auth:register' %}" method="post">
+                  action="{% url 'auth:register' %}" method="post" enctype=multipart/form-data>
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-md-6">

@@ -53,6 +53,7 @@ class RegisterForm(UserCreationForm):
         self.fields['avatar'].widget.attrs['placeholder'] = 'Выберите картинку для аватара'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+        self.fields['avatar'].widget.attrs['class'] = 'custom-file-input'
 
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
@@ -87,7 +88,6 @@ class UpdateForm(UserChangeForm):
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите фамилию'
         self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
         self.fields['avatar'].widget.attrs['placeholder'] = 'Выберите изображение'
-        self.fields['avatar'].widget.attrs['class'] = 'custom-file-input'
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
         for field_name, field in self.fields.items():
@@ -95,7 +95,7 @@ class UpdateForm(UserChangeForm):
             field.help_text = ''
             if field_name == 'password':
                 field.widget = forms.HiddenInput()
-
+        self.fields['avatar'].widget.attrs['class'] = 'custom-file-input'
 
 class CustomUserProfileEditForm(forms.ModelForm):
     GENDER_CHOICES = [('F', 'Ж'),
