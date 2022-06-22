@@ -1,6 +1,9 @@
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
-from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 
 from mainapp.models import Article, ArticleCategory
 from personalapp.forms import ArticleForm
@@ -76,3 +79,23 @@ class ArticleUpdateView(UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
         return super(ArticleUpdateView, self).dispatch(request, *args, **kwargs)
+
+
+class ModerationListView(ListView):
+    model = Article
+    template_name = 'personalapp/moderation.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ModerationListView, self).get_context_data(**kwargs)
+        context['title'] = {
+            "page_title": "Личный кабинет",
+            "title_row_1": "Наш Хабр",
+            "title_row_2": "Личный кабинет"
+        }
+        context['articles'] = Article.objects.filter(for_moderation=True)
+        context['categories'] = ArticleCategory.objects.all()
+        return context
+
+    @method_decorator(user_passes_test(lambda u: u.is_staff))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ModerationListView, self).dispatch(request, *args, **kwargs)

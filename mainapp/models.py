@@ -8,6 +8,10 @@ class ArticleCategory(models.Model):
     description = models.TextField(verbose_name="Описание", blank=True)
     is_deleted = models.BooleanField(default=False)
 
+    def delete(self, *args, **kwargs):
+        self.is_deleted = True
+        self.save()
+
     def __str__(self):
         return self.name
 
@@ -22,6 +26,11 @@ class Article(models.Model):
     edit_date = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
+    for_moderation = models.BooleanField(default=False)
+
+    def delete(self, *args, **kwargs):
+        self.is_deleted = True
+        self.save()
 
     def __str__(self):
         return f"{self.title} ({self.category.name})"

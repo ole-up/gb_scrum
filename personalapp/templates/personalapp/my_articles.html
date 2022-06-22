@@ -14,25 +14,43 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Тема статьи</th>
-                    <th>Дата создания</th>
-                    <th>Публикация</th>
-                    <th></th>
+                    <th class="text-center">Тема статьи</th>
+                    <th class="text-center">Дата создания</th>
+                    <th class="text-center">Последние изменения</th>
+                    <th class="text-center">Публикация</th>
+                    <th class="text-center">Удаление</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for article in articles %}
-                 <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="{% url 'personal:articles_update' article.id %}">{{ article.title }}</a></td>
-                    <td>{{ article.create_date }}</td>
-                    <td>
-                        <button type="button" class="btn-sm btn-success">Опубликовать</button>
-                    </td>
-                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
-                </tr>
+                    {% if not article.is_deleted %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td><a href="{% url 'personal:articles_update' article.id %}">{{ article.title }}</a></td>
+                            <td class="text-center">{{ article.create_date|date:"d E o" }}</td>
+                            <td class="text-center">{{ article.edit_date|date:"d E o" }}</td>
+                            <td>
+                                {% if article.is_published %}
+                                    <button type="button" class="btn-sm btn-danger"><a
+                                            href="{% url 'mainapp:unpublish_article' article.id %}">Снять c
+                                        публикации</a>
+                                    </button>
+                                {% else %}
+                                    {% if article.for_moderation %}
+                                        <button type="button" class="btn-sm btn-warning">Статья на модерации</button>
+                                    {% else %}
+                                        <button type="button" class="btn-sm btn-success"><a
+                                                href="{% url 'mainapp:moderate_article' article.id %}">Опубликовать</a>
+                                        </button>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            <td class="text-center"><a href="{% url 'mainapp:delete_article' article.id %}"><i
+                                    class="ico-circle-cross"></i></a></td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
-               </tbody>
+                </tbody>
             </table>
         </div>
         <div class="col-md-12">

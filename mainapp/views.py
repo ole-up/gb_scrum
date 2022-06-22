@@ -1,7 +1,6 @@
-import datetime
-
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
+from django.urls import reverse
 
 from mainapp.models import Article, ArticleCategory
 
@@ -48,5 +47,43 @@ def view_article(request, article_id):
 
     content = {"title": title,
                "article": article,
-               'categories': ArticleCategory.objects.all(),}
+               'categories': ArticleCategory.objects.all(), }
     return render(request, "mainapp/article.html", content)
+
+
+def moderate_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.for_moderation = True
+    article.save()
+    return HttpResponseRedirect(reverse('personal:articles'))
+
+
+def publish_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.for_moderation = False
+    article.is_published = True
+    article.save()
+    return HttpResponseRedirect(reverse('personal:moderation'))
+
+
+def refuse_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.for_moderation = False
+    article.is_published = False
+    article.save()
+    return HttpResponseRedirect(reverse('personal:moderation'))
+
+
+def unpublish_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.for_moderation = False
+    article.is_published = False
+    article.save()
+    return HttpResponseRedirect(reverse('personal:articles'))
+
+
+def delete_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.is_deleted = True
+    article.save()
+    return HttpResponseRedirect(reverse('personal:articles'))

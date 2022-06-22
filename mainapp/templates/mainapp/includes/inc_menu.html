@@ -43,6 +43,9 @@
                             <a data-toggle="dropdown" href="{% url 'personal:main' %}" aria-expanded="false"><i
                                     class="ico-user"></i> {{ user.username }}</a>
                             <ul class="dropdown-menu">
+                                {% if user.is_staff %}
+                                    <li><a href="{% url 'personal:moderation' %}">Модерация</a></li>
+                                    {% endif %}
                                 <li><a href="{% url 'personal:articles' %}">Мои статьи</a></li>
                                 <li><a href="{% url 'personal:main' %}">Сообщения</a></li>
                                 <li><a href="{% url 'auth:profile' %}">Профиль</a></li>
