@@ -26,7 +26,7 @@
                 {% for article in articles %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td><a href="{% url 'mainapp:article' article.id %}">{{ article.title }}</a></td>
+                        <td><a href="{% url 'mainapp:article' article.id %}" target="_blank">{{ article.title }}</a></td>
                         <td class="text-center">{{ article.author }}</td>
                         <td class="text-center">{{ article.edit_date|date:"d E o" }}</td>
                         <td class="text-center"><button type="button" class="btn-sm btn-success">
