@@ -1,8 +1,11 @@
+import random
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
 from mainapp.models import Article, ArticleCategory
+from authapp.models import CustomUser
 
 
 def get_articles_ordered_by_date(category_id):
@@ -32,6 +35,7 @@ def articles(request, category_id=None, page=1):
         'title': title,
         'articles': articles_paginator,
         'categories': ArticleCategory.objects.all(),
+        'author': CustomUser.objects.filter(id=random.randint(1, CustomUser.objects.latest('id').id)).first(),
     }
     return render(request, 'mainapp/index.html', context)
 
@@ -47,7 +51,9 @@ def view_article(request, article_id):
 
     content = {"title": title,
                "article": article,
-               'categories': ArticleCategory.objects.all(), }
+               'categories': ArticleCategory.objects.all(),
+               'author': CustomUser.objects.filter(id=article.author.id).first()
+               }
     return render(request, "mainapp/article.html", content)
 
 

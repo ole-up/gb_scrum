@@ -15,7 +15,7 @@
                         </h2>
                         <div class="entry-meta">
                             <span class="meta-part"><i class="ico-user"></i><a
-                                    href="./index.html"> {{ article.author }}</a></span>
+                                    href="./index.html"> {{ article.author.last_name }} {{ article.author.first_name }}</a></span>
                             <span class="meta-part"><i class="ico-calendar-alt-fill"></i><a
                                     href="./index.html"> {{ article.edit_date|date:"d E o" }}</a></span>
                             {#                    <span class="meta-part"><i class="ico-comments"></i><a href="./index.html">20</a></span>#}
