@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
-from mainapp.models import Article, ArticleCategory
+from mainapp.models import Article, ArticleCategory, Comment
 from authapp.models import CustomUser
 
 
@@ -42,6 +42,7 @@ def articles(request, category_id=None, page=1):
 
 def view_article(request, article_id):
     article = Article.objects.get(id=article_id)
+    comments = Comment.objects.filter(article=article_id).all()
 
     title = {
         "page_title": article.category,
@@ -52,7 +53,8 @@ def view_article(request, article_id):
     content = {"title": title,
                "article": article,
                'categories': ArticleCategory.objects.all(),
-               'author': CustomUser.objects.filter(id=article.author.id).first()
+               'author': CustomUser.objects.filter(id=article.author.id).first(),
+               'comments': comments,
                }
     return render(request, "mainapp/article.html", content)
 

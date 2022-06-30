@@ -1,6 +1,9 @@
 from django.db import models
+from sequences import Sequence
 
 from authapp.models import CustomUser
+
+comment_ids = Sequence("mainapp_comment")
 
 
 class ArticleCategory(models.Model):
@@ -34,3 +37,38 @@ class Article(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.category.name})"
+
+
+class Comment(models.Model):
+    path = models.CharField(verbose_name="Путь", max_length=150)
+    level = models.IntegerField(verbose_name="Уровень вложенности")
+    create_date = models.DateTimeField(auto_now_add=True)
+    edit_date = models.DateTimeField(auto_now=True)
+    comment_body = models.TextField(verbose_name="Содержимое комментария")
+    author = models.ForeignKey(CustomUser, null=False, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, null=False, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['path']
+
+    @classmethod
+    def create(cls, article, comment_body, author, parent_path=None):
+        path = str(cls.pk).zfill(9) if parent_path is None else f'{parent_path}.{str(cls.pk).zfill(9)}'
+        level = path.count('.')
+        comment = cls(path=path,
+                      level=level,
+                      comment_body=comment_body,
+                      author=author,
+                      article=article
+                      )
+        return comment
+
+    # def __init__(self, article, comment_body, author, parent_path=None, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     _id = comment_ids.get_next_value()
+    #     self.id = _id
+    #     self.path = str(self.id).zfill(9) if parent_path is None else f'{parent_path}.{str(self.id).zfill(9)}'
+    #     self.level = self.path.count('.')
+    #     self.comment_body = comment_body
+    #     self.author = author
+    #     self.article = article

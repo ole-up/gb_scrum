@@ -40,10 +40,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_summernote',
+    "sequences.apps.SequencesConfig",
+    "django_summernote",
     "mainapp",
     "personalapp",
-    'authapp',
+    "authapp",
 ]
 
 MIDDLEWARE = [
