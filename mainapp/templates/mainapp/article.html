@@ -7,183 +7,202 @@
 
 {% block content %}
 
-                <div class="col-md-8">
 
-                    <article class="single-post-content">
-                        <h2 class="page-title">{{ article.title }}</h2>
-                        <div class="blog-item-wrap">
-                            <div class="entry-meta">
+    <div class="col-md-8">
+
+        <article class="single-post-content">
+            <h2 class="page-title">{{ article.title }}</h2>
+            <div class="blog-item-wrap">
+                <div class="entry-meta">
                     <span class="meta-part"><i class="ico-user"></i><a
                             href="#"> {{ article.author.last_name }} {{ article.author.first_name }}</a></span>
-                                <span class="meta-part"><i class="ico-calendar-alt-fill"></i><a
-                                        href="#"> {{ article.edit_date|date:"d E o" }}</a></span>
+                    <span class="meta-part"><i class="ico-calendar-alt-fill"></i><a
+                            href="#"> {{ article.edit_date|date:"d E o" }}</a></span>
 
-                                <span class="meta-part"><i class="ico-tag"></i> <a
-                                        href="#">{{ article.category }}</a></span>
-                                {#                <span class="meta-part"><i class="ico-comments"></i> <a href="#">20</a></span>#}
-                                {#                <span class="meta-part"><i class="ico-comments"></i> <a href="#">20</a></span>#}
-                            </div>
-                        </div>
-                        <div class="space"></div>
-                        {{ article.description|safe }}
-                    </article>
-
-
-                    <article>
-
-                        <div id="comments">
-                        <h2 class="page-title">Комментарии:</h2>
-                            <ol class="row comments-list">
-                                {% for comment in comments %}
-                                    {% if comment.level == 0 %}
-                                        <li>
-                                            {% elif comment.level == 1 %}
-                                        <li class="col-lg-offset-1">
-                                            {% elif comment.level == 2 %}
-                                        <li class="col-lg-offset-2">
-                                            {% else %}
-                                        <li class="col-lg-offset-3">
-                                    {% endif %}
-
-                                <div class="comment-box clearfix">
-                                    <div class="avatar">
-                                        <a href="./article.html"><img alt=""
-                                                                      src="{{ comment.author.avatar.url }}"></a>
-                                    </div>
-                                    <div class="comment-content">
-                                        <div class="comment-meta">
-                                            <h4 class="comment-by"><a
-                                                    href="./article.html">{{ comment.author.last_name }} {{ comment.author.first_name }}</a>
-                                            </h4>
-                                        </div>
-                                        <p>{{ comment.comment_body }}</p><a class="reply-link" href="./article.html">Reply</a>
-                                    </div>
-                                </div>
-                                </li>
-                                {% endfor %}
-
-                            </ol>
-                        </div>
-                    </article>
-
-                    <article>
-
-                        <div id="respond">
-                            <h2 class="respond-title">Add Comment</h2>
-                            <form action="./article.html">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <input class="form-control" id="author" name="author" placeholder="Name"
-                                               size="30"
-                                               type="text" value="">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" id="email" name="author" placeholder="Email"
-                                               size="30"
-                                               type="text" value="">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                    <textarea class="form-control" cols="45" id="comment" name="comment"
-                                              placeholder="Comment" rows="8"></textarea> <a
-                                            class="btn btn-common btn-more" id="submit" type="submit"><i
-                                            class="fa fa-check"></i> Submit Comment</a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </article>
-
-                    <article>
-                        <div class="relate-post">
-                            <h4>Releate Post</h4>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <ul class="posts-list">
-                                        <li>
-                                            <div class="widget-thumb">
-                                                <a href="./article.html"><img alt=""
-                                                                              src="{% static 'img/post/post1.jpg.jpeg' %}"></a>
-                                            </div>
-                                            <div class="widget-content">
-                                                <a href="./article.html">Aladdin rides
-                                                    'magic carpet' at New York in
-                                                    Halloween prank</a>
-                                                <div class="meta">
-                                                    <span><i class="ico-calendar-alt-fill"></i> October 7,2015</span>
-                                                    <span><i class="ico-tag"></i> Technology</span>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="posts-list">
-                                        <li>
-                                            <div class="widget-thumb">
-                                                <a href="./article.html"><img alt=""
-                                                                              src="{% static 'img/post/post2.jpg.jpeg' %}"></a>
-                                            </div>
-                                            <div class="widget-content">
-                                                <a href="./article.html">New Zealand makes
-                                                    history by winning third Rugby
-                                                    WC</a>
-                                                <div class="meta">
-                                                    <span><i class="ico-calendar-alt-fill"></i> October 7,2015</span>
-                                                    <span><i class="ico-tag"></i>Technology</span>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="posts-list">
-                                        <li>
-                                            <div class="widget-thumb">
-                                                <a href="./article.html"><img alt=""
-                                                                              src="{% static 'img/post/post3.jpg.jpeg' %}"></a>
-                                            </div>
-                                            <div class="widget-content">
-                                                <a href="./article.html">Romania calls for 3
-                                                    days of mourning after
-                                                    nightclub fire kills at least
-                                                    27</a>
-                                                <div class="meta">
-                                                    <span><i class="ico-calendar-alt-fill"></i>October 7,2015</span>
-                                                    <span><i class="ico-tag"></i>Technology</span>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="posts-list">
-                                        <li>
-                                            <div class="widget-thumb">
-                                                <a href="./article.html"><img alt=""
-                                                                              src="{% static 'img/post/post4.jpg.jpeg' %}"></a>
-                                            </div>
-                                            <div class="widget-content">
-                                                <a href="./article.html">3 years of 'Star
-                                                    Wars Episode VII' fandom,
-                                                    celebrated</a>
-                                                <div class="meta">
-                                                    <span><i class="ico-calendar-alt-fill"></i>October 7,2015</span>
-                                                    <span><i class="ico-tag"></i>Technology</span>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                    <span class="meta-part"><i class="ico-tag"></i> <a
+                            href="#">{{ article.category }}</a></span>
+                    {#                <span class="meta-part"><i class="ico-comments"></i> <a href="#">20</a></span>#}
+                    {#                <span class="meta-part"><i class="ico-comments"></i> <a href="#">20</a></span>#}
                 </div>
+            </div>
+            <div class="space"></div>
+            {{ article.description|safe }}
+        </article>
+
+
+        <article>
+
+            <div id="comments">
+                <h2 class="page-title">Комментарии:</h2>
+                <ol class="row comments-list">
+                    {% for comment in comments %}
+                        {% if comment.level == 0 %}
+                            <li id="{{ comment.path }}">
+                                {% elif comment.level == 1 %}
+                            <li class="col-lg-offset-1" id="{{ comment.path }}">
+                                {% elif comment.level == 2 %}
+                            <li class="col-lg-offset-2" id="{{ comment.path }}">
+                                {% else %}
+                            <li class="col-lg-offset-3" id="{{ comment.path }}">
+                        {% endif %}
+
+                    <div class="comment-box clearfix">
+                        <div class="avatar">
+                            <a href="./article.html"><img alt=""
+                                                          src="{{ comment.author.avatar.url }}"></a>
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-meta">
+                                <h4 class="comment-by"><a
+                                        href="#">{{ comment.author.last_name }} {{ comment.author.first_name }}</a>
+                                </h4>
+                            </div>
+                            <p>{{ comment.comment_body }}</p>
+                            {% if user.is_authenticated %}
+                                {% if article.author == comment.author %}
+                                    <a class="reply-link" href="#">Удалить</a>
+                                    <a class="reply-link col-md-offset-1" href="#">Редактировать</a>
+                                {% else %}
+                                    <button class="btn-sm btn-link reply-link" type="button"
+                                            onclick="document.getElementById('id_parent_path').value='{{ comment.path }}'; document.getElementById('respond-title').innerHTML='Ответ на <a href=#{{ comment.path }}>сообщение</a> пользователя {{ comment.author.last_name }} {{ comment.author.first_name }}'">
+                                        <a href="#respond">Ответить</a></button>
+                                {% endif %}
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                    </li>
+                    {% endfor %}
+
+                </ol>
+            </div>
+        </article>
+
+        <article id="respond">
+            <form action="{% url 'mainapp:article' article.id %}" method="post">
+                {% csrf_token %}
+                <div>
+                    {% if user.is_authenticated %}
+                        <h2 class="respond-title" id="respond-title">Добавить комментарий:</h2>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.parent_path }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.article_id }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.author }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ form.comment_body }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-link reply-link" id="submit" type="submit"><i
+                                        class="fa fa-check"></i>Опубликовать
+                                </button>
+                            </div>
+                        </div>
+
+                    {% else %}
+                        <h2 class="respond-title">Авторизируйтесь чтобы добавлять комментарии!</h2>
+                    {% endif %}
+                </div>
+            </form>
+        </article>
+        {#        <article>#}
+        {#            <div class="relate-post">#}
+        {#                <h4>Releate Post</h4>#}
+        {#                <div class="row">#}
+        {#                    <div class="col-sm-6">#}
+        {#                        <ul class="posts-list">#}
+        {#                            <li>#}
+        {#                                <div class="widget-thumb">#}
+        {#                                    <a href="./article.html"><img alt=""#}
+        {#                                                                  src="{% static 'img/post/post1.jpg.jpeg' %}"></a>#}
+        {#                                </div>#}
+        {#                                <div class="widget-content">#}
+        {#                                    <a href="./article.html">Aladdin rides#}
+        {#                                        'magic carpet' at New York in#}
+        {#                                        Halloween prank</a>#}
+        {#                                    <div class="meta">#}
+        {#                                        <span><i class="ico-calendar-alt-fill"></i> October 7,2015</span>#}
+        {#                                        <span><i class="ico-tag"></i> Technology</span>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="clearfix"></div>#}
+        {#                            </li>#}
+        {#                        </ul>#}
+        {#                    </div>#}
+        {#                    <div class="col-sm-6">#}
+        {#                        <ul class="posts-list">#}
+        {#                            <li>#}
+        {#                                <div class="widget-thumb">#}
+        {#                                    <a href="./article.html"><img alt=""#}
+        {#                                                                  src="{% static 'img/post/post2.jpg.jpeg' %}"></a>#}
+        {#                                </div>#}
+        {#                                <div class="widget-content">#}
+        {#                                    <a href="./article.html">New Zealand makes#}
+        {#                                        history by winning third Rugby#}
+        {#                                        WC</a>#}
+        {#                                    <div class="meta">#}
+        {#                                        <span><i class="ico-calendar-alt-fill"></i> October 7,2015</span>#}
+        {#                                        <span><i class="ico-tag"></i>Technology</span>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="clearfix"></div>#}
+        {#                            </li>#}
+        {#                        </ul>#}
+        {#                    </div>#}
+        {#                    <div class="col-sm-6">#}
+        {#                        <ul class="posts-list">#}
+        {#                            <li>#}
+        {#                                <div class="widget-thumb">#}
+        {#                                    <a href="./article.html"><img alt=""#}
+        {#                                                                  src="{% static 'img/post/post3.jpg.jpeg' %}"></a>#}
+        {#                                </div>#}
+        {#                                <div class="widget-content">#}
+        {#                                    <a href="./article.html">Romania calls for 3#}
+        {#                                        days of mourning after#}
+        {#                                        nightclub fire kills at least#}
+        {#                                        27</a>#}
+        {#                                    <div class="meta">#}
+        {#                                        <span><i class="ico-calendar-alt-fill"></i>October 7,2015</span>#}
+        {#                                        <span><i class="ico-tag"></i>Technology</span>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="clearfix"></div>#}
+        {#                            </li>#}
+        {#                        </ul>#}
+        {#                    </div>#}
+        {#                    <div class="col-sm-6">#}
+        {#                        <ul class="posts-list">#}
+        {#                            <li>#}
+        {#                                <div class="widget-thumb">#}
+        {#                                    <a href="./article.html"><img alt=""#}
+        {#                                                                  src="{% static 'img/post/post4.jpg.jpeg' %}"></a>#}
+        {#                                </div>#}
+        {#                                <div class="widget-content">#}
+        {#                                    <a href="./article.html">3 years of 'Star#}
+        {#                                        Wars Episode VII' fandom,#}
+        {#                                        celebrated</a>#}
+        {#                                    <div class="meta">#}
+        {#                                        <span><i class="ico-calendar-alt-fill"></i>October 7,2015</span>#}
+        {#                                        <span><i class="ico-tag"></i>Technology</span>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="clearfix"></div>#}
+        {#                            </li>#}
+        {#                        </ul>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </article>#}
+    </div>
 
 
 

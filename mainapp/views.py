@@ -2,9 +2,14 @@ import random
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic.base import TemplateResponseMixin
+from django.views.generic.detail import BaseDetailView
+from django.views.generic.list import BaseListView
+from django.views.generic.edit import BaseCreateView
 
 from mainapp.models import Article, ArticleCategory, Comment
+from mainapp.forms import CommentForm
 from authapp.models import CustomUser
 
 
@@ -27,9 +32,9 @@ def articles(request, category_id=None, page=1):
     except EmptyPage:
         articles_paginator = paginator.page(paginator.num_pages)
     title = {
-        "page_title": get_category_name_by_id(category_id) if category_id else "Главная",
-        "title_row_1": "Наш Хабр" if category_id else "Добро пожаловать на портал",
-        "title_row_2": get_category_name_by_id(category_id) if category_id else "Наш Хабр"
+        'page_title': get_category_name_by_id(category_id) if category_id else "Главная",
+        'title_row_1': "Наш Хабр" if category_id else "Добро пожаловать на портал",
+        'title_row_2': get_category_name_by_id(category_id) if category_id else "Наш Хабр"
     }
     context = {
         'title': title,
@@ -43,20 +48,28 @@ def articles(request, category_id=None, page=1):
 def view_article(request, article_id):
     article = Article.objects.get(id=article_id)
     comments = Comment.objects.filter(article=article_id).all()
-
+    form = CommentForm(initial={'author': request.user, 'article_id': article.id})
     title = {
-        "page_title": article.category,
-        "title_row_1": "Наш Хабр",
-        "title_row_2": article.category
+        'page_title': article.category,
+        'title_row_1': "Наш Хабр",
+        'title_row_2': article.category
     }
 
-    content = {"title": title,
-               "article": article,
+    content = {'title': title,
+               'article': article,
                'categories': ArticleCategory.objects.all(),
                'author': CustomUser.objects.filter(id=article.author.id).first(),
                'comments': comments,
+               'form': form,
                }
-    return render(request, "mainapp/article.html", content)
+    if request.method == 'POST':
+        print(request.POST)
+        form = CommentForm(data=request.POST, initial={'author': request.user, 'article_id': article.id})
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('mainapp:article', args=[article.id]))
+
+    return render(request, 'mainapp/article.html', content)
 
 
 def moderate_article(request, article_id):
