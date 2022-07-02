@@ -7,307 +7,61 @@
 
 {% block content %}
     <div class="col-md-8">
-        <article>
-            <div class="blog-item-wrap">
-                <div class="post-format">
-                    <span><i class="fa fa-camera"></i></span>
-                </div>
-                <h2 class="blog-title"><a href="./single.html">Personal Blog and Portfolio Template</a></h2>
-                <div class="entry-meta">
-                    <span class="meta-part"><i class="ico-user"></i><a href="./index.html">James Maclern</a></span>
-                    <span class="meta-part"><i class="ico-calendar-alt-fill"></i><a
-                            href="./index.html">January 7, 2015</a></span>
-                    <span class="meta-part"><i class="ico-comments"></i><a href="./index.html">20</a></span>
-                    <span class="meta-part"><i class="ico-tag"></i><a href="./index.html">Tech</a></span>
-                    <span class="meta-part"><i class="ico-star"></i><a href="./index.html">7.5</a></span>
-                </div>
+        {% for article in articles %}
+            {% if article.is_published and not article.is_deleted  %}
+                <article>
+                    <div class="blog-item-wrap">
+                        <h2 class="blog-title"><a href="{% url 'mainapp:article' article.id %}">{{ article.title }}</a>
+                        </h2>
+                        <div class="entry-meta">
+                            <span class="meta-part"><i class="ico-user"></i><a
+                                    href="./index.html"> {{ article.author.last_name }} {{ article.author.first_name }}</a></span>
+                            <span class="meta-part"><i class="ico-calendar-alt-fill"></i><a
+                                    href="./index.html"> {{ article.edit_date|date:"d E o" }}</a></span>
+                            {#                    <span class="meta-part"><i class="ico-comments"></i><a href="./index.html">20</a></span>#}
+                            <span class="meta-part"><i class="ico-tag"></i><a
+                                    href="{% url 'mainapp:articles' article.category.id %}"> {{ article.category }}</a></span>
+                            {#                    <span class="meta-part"><i class="ico-star"></i><a href="./index.html">7.5</a></span>#}
+                        </div>
 
-                <div class="feature-inner">
-                    <a data-lightbox="roadtrip" href="img/blog/blog-01.jpg.jpeg"><img alt=""
-                                                                                      src="{% static 'img/blog/blog-01.jpg.jpeg' %}"></a>
-                </div>
+                        <div class="feature-inner">
+                            <a data-lightbox="roadtrip" href="{{ article.image.url }}"><img alt=""
+                                                                                            src="{{ article.image.url }}"></a>
+                        </div>
 
-                <div class="post-content">
-                    <p>Internet Explorer has long been the bane of
-                        many Web developers&#226;&#128;&#153; existence, but here&#226;&#128;&#153;s some
-                        news to brighten your day: Internet Explorer 8,
-                        9 and 10 are <a
-                                href="https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support"
-                                target="_blank">reaching&#160;&#226;&#128;&#152;end of life&#226;&#128;&#153;
-                            on Tuesday</a>, meaning they&#226;&#128;&#153;re no longer supported by
-                        Microsoft.</p>
-                    <p>A patch, <a
-                            href="https://support.microsoft.com/en-us/kb/3123303?sd=rss&amp;spid=14019"
-                            target="_blank">which goes live on January
-                        12</a>, will nag Internet Explorer users on
-                        launch to upgrade to a modern browser. <a
-                                href="https://support.microsoft.com/en-us/kb/3123303?sd=rss&amp;spid=14019"
-                                target="_blank">KB3123303</a> adds the&#160;nag
-                        box, which will appear for Windows 7 and Server
-                        2008 R2 users still using the old browsers
-                        after installing the update.</p>
-                    <p>It&#226;&#128;&#153;s great news for developers who still
-                        need to target older browsers &#226;&#128;&#148; not needing to
-                        worry about whether or not modern CSS works in
-                        these browsers is a dream, and it&#226;&#128;&#153;s much closer
-                        with this move.</p>
-                </div>
-                <div class="entry-more">
-                    <div class="pull-left">
-                        <a class="btn btn-common" href="single.html">Read More <i
-                                class="ico-arrow-right"></i></a>
-                    </div>
-                    <div class="share-icon pull-right">
-                        <span class="socialShare"></span>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article>
-            <div class="blog-item-wrap">
-                <div class="post-format">
-                    <span><i class="fa fa-video-camera"></i></span>
-                </div>
-                <h2 class="blog-title"><a href="single.html">Intimate - Made with Bootstrap and HTML5</a>
-                </h2>
-                <div class="entry-meta">
-                    <span class="meta-part"><i class="ico-user"></i> <a href="#">James Maclern</a></span>
-                    <span class="meta-part"><i class="ico-calendar-alt-fill"></i> <a href="#">January 7, 2015</a></span>
-                    <span class="meta-part"><i class="ico-comments"></i> <a href="#">20</a></span>
-                    <span class="meta-part"><i class="ico-tag"></i> <a href="#">Tech</a></span>
-                    <span class="meta-part"><i class="ico-star"></i> <a href="#">7.5</a></span>
-                </div>
-
-                <div class="feature-inner">
-                    <iframe allowfullscreen="" frameborder="0" height="345"
-                            src="https://player.vimeo.com/video/93736031?title=0&amp;byline=0&amp;portrait=0"
-                            width="100%"></iframe>
-                    <p><a href="https://vimeo.com/93736031">TheSynapse mobile app</a> from <a
-                            href="https://vimeo.com/jeffgalea">Jeff Galea</a> on
-                        <a href="https://vimeo.com">Vimeo</a>.</p>
-                </div>
-
-                <div class="post-content">
-                    <p>HP is not normally the first company that
-                        comes to mind when you think of top-notch
-                        laptop design, but it just took a giant stride
-                        to make you think again. Its new EliteBook
-                        Folio sets its sights firmly on the <a
-                                href="http://thenextweb.com/apple/2015/06/12/the-new-macbook-is-my-dream-machine-and-i-dont-care-about-the-compromises/#gref">
-                            2015 MacBook</a>&#160;&#226;&#128;&#147; from what I&#226;&#128;&#153;ve
-                        seen&#160;so far it looks like it&#226;&#128;&#153;s going to be
-                        a fair fight.</p>
-                    <p>At first glance, it ticks all the boxes. The
-                        laptop is only 12.4 mm at its thickest point
-                        and weighs 2.2 lb (versus 13.1 mm/2.03 lb on
-                        the MacBook), and comes in an attractive
-                        metallic finish. The pictures don&#226;&#128;&#153;t really do
-                        it justice &#226;&#128;&#147; it&#226;&#128;&#153;s more gunmetal than silver and
-                        has a more reflective sheen than the flat matte
-                        so prevalent in Apple products.</p>
-                </div>
-                <div class="entry-more">
-                    <div class="pull-left">
-                        <a class="btn btn-common" href="single.html">Read More <i
-                                class="ico-arrow-right"></i></a>
-                    </div>
-                    <div class="share-icon pull-right">
-                        <span class="socialShare"></span>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <div class="post-quote text-center">
-            <blockquote>
-                <div class="icon">
-                    <i class="ico-quote"></i>
-                </div>
-                <p>Design is not what its looks like and feels
-                    like. Design is how it works...</p>
-                <p class="client-name">- Steave Jobs, CEO,
-                    Apple</p>
-            </blockquote>
-        </div>
-
-        <article>
-
-            <div class="blog-item-wrap">
-
-                <div class="post-format">
-                    <span><i class="fa fa-volume-up"></i></span>
-                </div>
-                <h2 class="blog-title"><a href="single.html">Let&#226;&#128;&#153;s enjoy the music</a></h2>
-                <div class="entry-meta">
-                    <span class="meta-part"><i class="ico-user"></i> <a href="#">James Maclern</a></span>
-                    <span class="meta-part"><i class="ico-calendar-alt-fill"></i> <a href="#">January 7, 2015</a></span>
-                    <span class="meta-part"><i class="ico-comments"></i> <a href="#">20</a></span>
-                    <span class="meta-part"><i class="ico-tag"></i> <a href="#">Tech</a></span>
-                    <span class="meta-part"><i class="ico-star"></i> <a href="#">7.5</a></span>
-                </div>
-
-                <div class="feature-inner">
-                    <iframe frameborder="no" height="280" scrolling="no"
-                            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/230240104&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"
-                            width="100%"></iframe>
-                </div>
-
-                <div class="post-content">
-                    <p>If pre-show appearances were any inclination
-                        of what we were about to see, this would have
-                        made for an amazing annoucement designed to
-                        show off Sony&#226;&#128;&#153;s new wares. But if you believe
-                        that large and impressive-looking booth spaces
-                        and hundreds of reporters are a sign of great
-                        things to come, you&#226;&#128;&#153;d be mistaken.</p>
-                </div>
-                <div class="entry-more">
-                    <div class="pull-left">
-                        <a class="btn btn-common" href="single.html">Read More <i
-                                class="ico-arrow-right"></i></a>
-                    </div>
-                    <div class="share-icon pull-right">
-                        <span class="socialShare"></span>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article>
-
-            <div class="blog-item-wrap">
-
-                <div class="post-format">
-                    <span><i class="fa fa-picture-o"></i></span>
-                </div>
-                <h2 class="blog-title"><a href="single.html">Have an Amazing Blogging and Portfolio Showcase
-                    Experience</a></h2>
-                <div class="entry-meta">
-                    <span class="meta-part"><i class="ico-user"></i> <a href="#">James Maclern</a></span>
-                    <span class="meta-part"><i class="ico-calendar-alt-fill"></i> <a href="#">January 7, 2015</a></span>
-                    <span class="meta-part"><i class="ico-comments"></i> <a href="#">20</a></span>
-                    <span class="meta-part"><i class="ico-tag"></i> <a href="#">Tech</a></span>
-                    <span class="meta-part"><i class="ico-star"></i> <a href="#">7.5</a></span>
-                </div>
-
-                <div class="feature-inner">
-
-                    <div class="post-thumb">
-                        <div class="touch-slider owl-carousel">
-                            <div class="item">
-                                <a href="#"><img alt="" src="{% static 'img/blog/blog-04.jpg.jpeg' %}"></a>
+                        <div class="post-content">
+                            {{ article.description|safe|truncatechars_html:400 }}
+                        </div>
+                        <div class="entry-more">
+                            <div class="pull-left">
+                                <a class="btn btn-common" href="{% url 'mainapp:article' article.id %}">Далее <i
+                                        class="ico-arrow-right"></i></a>
                             </div>
-                            <div class="item">
-                                <a href="#"><img alt="" src="{% static 'img/blog/blog-01.jpg.jpeg' %}"></a>
-                            </div>
-                            <div class="item">
-                                <a href="#"><img alt="" src="{% static 'img/blog/blog-05.jpg.jpeg' %}"></a>
+                            <div class="share-icon pull-right">
+                                <span class="socialShare"></span>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="post-content">
-                    <p>The Netherlands government vocalized its
-                        support for the use of encryption to maintain
-                        privacy online, in <a
-                                href="http://www.tweedekamer.nl/kamerstukken/brieven_regering/detail?id=2016Z00009&amp;did=2016D00015"
-                                target="_blank">a statement issued on
-                            Monday</a>.</p>
-                    <p>The country&#226;&#128;&#153;s minister of security and
-                        justice Ard van der Steur wrote that the Dutch
-                        executive cabinet endorsed &#226;&#128;&#156;the importance of
-                        strong encryption for Internet security to
-                        support the protection of privacy for citizens,
-                        companies, the government, and the entire Dutch
-                        economy.</p>
-                    <p>Therefore, the government believes that it
-                        is currently not desirable to take legal
-                        measures against the development, availability
-                        and use of encryption within the
-                        Netherlands.&#226;&#128;&#157;</p>
-                    <p></p>
-                </div>
-                <div class="entry-more">
-                    <div class="pull-left">
-                        <a class="btn btn-common" href="single.html">Read More <i
-                                class="ico-arrow-right"></i></a>
-                    </div>
-                    <div class="share-icon pull-right">
-                        <span class="socialShare"></span>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <div class="post-quote text-center">
-            <blockquote>
-                <div class="icon">
-                    <i class="ico-reply"></i>
-                </div>
-                <p>Design is not what its looks like and feels
-                    like. Design is how it works...</p><a href="#">https://youtu.be/sPfJQmpg5zk</a>
-            </blockquote>
-        </div>
-
-        <article>
-
-            <div class="blog-item-wrap">
-
-                <div class="post-format">
-                    <span><i class="ico-bookmark"></i></span>
-                </div>
-                <h2 class="blog-title"><a href="#">Clean and Simplified UI/UX</a></h2>
-                <div class="entry-meta">
-                    <span class="meta-part"><i class="ico-user"></i> <a href="#">James Maclern</a></span>
-                    <span class="meta-part"><i class="ico-calendar-alt-fill"></i> <a href="#">January 7, 2015</a></span>
-                    <a href="#">20</a></span>
-                    <span class="meta-part"><i class="ico-tag"></i> <a href="#">Tech</a></span>
-                    <span class="meta-part"><i class="ico-star"></i> <a href="#">7.5</a></span>
-                </div>
-
-                <div class="post-content">
-                    <p>The first day of work of 2016 brings with it
-                        the dread of a dawning realization for most&#226;&#128;&#166;
-                        you&#226;&#128;&#153;ve made New Year&#226;&#128;&#153;s resolutions, and you
-                        have to stick to them. Or, at the very least,
-                        you should give it the old college try.
-                        According to a study by the University of
-                        Scranton published in the Journal of
-                        Psychology, 45 percent of Americans usually
-                        make resolutions, but only 8 percent are
-                        successful. It also found that those who
-                        explicitly make resolutions are ten times more
-                        likely to succeed in accomplishing them.</p>
-                </div>
-                <div class="entry-more">
-                    <div class="pull-left">
-                        <a class="btn btn-common" href="single.html">Read More <i
-                                class="ico-arrow-right"></i></a>
-                    </div>
-                    <div class="share-icon pull-right">
-                        <span class="socialShare"></span>
-                    </div>
-                </div>
-            </div>
-        </article>
+                </article>
+            {% endif %}
+        {% endfor %}
 
         <article>
 
             <ul class="pager">
-                <li class="previous">
-                    <a href="#"><i class="ico-arrow-left"></i>Previous</a>
+                <li class="previous{% if not articles.has_previous %} disabled hide{% endif %} ">
+                    <a href="{% if articles.has_previous %} {% url 'articles:page' articles.previous_page_number %} {% endif %}"><i
+                            class="ico-arrow-left"></i>Предыдущая</a>
                 </li>
-                <li style="list-style: none">
-                    <span class="active"><a href="#">1</a></span>
-                    <span><a href="#">2</a></span>
-                    <span><a href="#">3</a></span>
-                    <span><a href="#">4</a></span>
-                    <span><a href="#">5</a></span>
-                </li>
-                <li class="next">
-                    <a href="#">Next <i class="ico-arrow-right"></i></a>
+                {% for page in articles.paginator.page_range %}
+                    <li style="list-style: none">
+                        <span class="{% if page == articles.number %} active {% endif %}"><a
+                                href="{% url 'articles:page' page %}">{{ page }}</a></span>
+                    </li>
+                {% endfor %}
+                <li class="next {% if not articles.has_next %} disabled hide{% endif %}">
+                    <a href="{% if articles.has_next %} {% url 'articles:page' articles.next_page_number %} {% endif %}">Следующая<i
+                            class="ico-arrow-right"></i></a>
                 </li>
             </ul>
         </article>

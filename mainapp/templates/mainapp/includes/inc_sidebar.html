@@ -4,19 +4,11 @@
                         <div class="entry-widget">
                             <div class="widget-profile">
                                 <div class="image"><img alt="" src="{% static 'img/blog/cover.jpg.jpeg' %}"></div>
-                                <div class="portfolio"><img alt="" src="{% static 'img/blog/portfolio.jpg.jpeg' %}">
+                                <div class="portfolio"><img alt="" src="{{ author.avatar.url }}">
                                 </div>
                                 <div class="info">
-                                    <h3 class="name">Margaret Gould</h3>
-                                    <p class="details">Margaret Gould Stewart
-                                        currently serves as Director of Product
-                                        Design at Facebook. She previously served
-                                        as Director of User Experience at YouTube.
-                                        Prior to that, she spent two years leading
-                                        Search and Consumer Products UX at Google.
-                                        Margaret has been a leading practitioner
-                                        and manager in the field of User Experience
-                                        for over 15 years.</p>
+                                    <h3 class="name">{{ author.last_name }} {{ author.first_name }}</h3>
+                                    <p class="details">{{ author.customuserprofile.about_me }}</p>
                                     <div class="social-links">
                                         <a class="twitter social-link" data-placement="top" data-toggle="tooltip"
                                            href="#"

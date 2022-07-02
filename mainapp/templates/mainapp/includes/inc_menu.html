@@ -28,23 +28,36 @@
             <div class="navbar-collapse collapse" id="navigation">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active">
-                        <a href="/">Главная</a>
+                        <a href="{% url 'mainapp:index' %}">Главная</a>
                     </li>
-                    <li>
-                        <a href="/design/">Дизайн</a>
-                    </li>
-                    <li>
-                        <a href="/web/">Веб-разработка</a>
-                    </li>
-                    <li>
-                        <a href="/mobile/">Мобильная разработка</a>
-                    </li>
-                    <li>
-                        <a href="/marketing/">Маркетинг</a>
-                    </li>
-                    <li>
-                        <a href="/login/"><i class="ico-user"></i></a>
-                    </li>
+                    {% for category in categories %}
+                        {% if not category.is_deleted %}
+                            <li>
+                                <a href="{% url 'mainapp:articles' category.id %}">{{ category.name }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if user.is_authenticated %}
+                        <li class="dropdown dropdown-toggle">
+                            <a data-toggle="dropdown" href="{% url 'personal:main' %}" aria-expanded="false"><i
+                                    class="ico-user"></i> {{ user.username }}</a>
+                            <ul class="dropdown-menu">
+                                {% if user.is_staff %}
+                                    <li><a href="{% url 'personal:moderation' %}">Модерация</a></li>
+                                    {% endif %}
+                                <li><a href="{% url 'personal:articles' %}">Мои статьи</a></li>
+                                <li><a href="{% url 'personal:main' %}">Сообщения</a></li>
+                                <li><a href="{% url 'auth:profile' %}">Профиль</a></li>
+                                <li><a href="{% url 'auth:logout' %}">Выйти</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'auth:login' %}"><i class="ico-user"></i></a>
+                        </li>
+                    {% endif %}
+
                 </ul>
             </div>
         </div>
