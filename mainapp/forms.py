@@ -16,7 +16,6 @@ class CommentForm(ModelForm):
             'article_id ': NumberInput()
         }
 
-
     def __init__(self, *args, **kwargs):
         super(CommentForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
@@ -25,10 +24,9 @@ class CommentForm(ModelForm):
         self.fields['article_id'].widget.attrs['class'] = 'hidden'
         self.fields['author'].widget.attrs['class'] = 'hidden'
 
-
     def save(self, commit=True):
         comment = super(CommentForm, self).save(commit=False)
-        comment.path =  f'{self.cleaned_data["parent_path"]}'
+        comment.path = f'{self.cleaned_data["parent_path"]}'
         comment.level = comment.path.count('.')
         comment.article = Article.objects.get(id=self.cleaned_data["article_id"])
         if commit:

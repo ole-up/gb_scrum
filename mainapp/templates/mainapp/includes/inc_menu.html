@@ -15,10 +15,10 @@
             <div class="side">
                 <a class="show-search"><i class="ico-search"></i></a>
             </div>
-            <form class="full-search">
+            <form class="full-search" method="GET" id="searchform">
                 <div class="container">
                     <div class="row">
-                        <input class="form-control" placeholder="Search" type="text">
+                        <input class="form-control" placeholder="Search..." type="text" name="query"  value="{{ request.GET.query }}">
                         <a class="close-search">
                             <span class="ico-times"></span>
                         </a>

@@ -31,6 +31,9 @@ class Article(models.Model):
     is_published = models.BooleanField(default=False)
     for_moderation = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['edit_date']
+
     def delete(self, *args, **kwargs):
         self.is_deleted = True
         self.save()

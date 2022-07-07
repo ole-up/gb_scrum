@@ -9,7 +9,7 @@
 
 
     <div class="col-md-8">
-
+        {% if not filter %}
         <article class="single-post-content">
             <h2 class="page-title">{{ article.title }}</h2>
             <div class="blog-item-wrap">
@@ -202,9 +202,20 @@
         {#                </div>#}
         {#            </div>#}
         {#        </article>#}
-    </div>
+
+{% else %}
+    <h2>Результаты поиска:</h2>
+        <div class="space"></div>
+    {% for obj in filter.qs %}
+        <p class="reply-link">
+        {{ forloop.counter }}. <a href="{% url 'mainapp:article' obj.id %}">{{ obj.title }}</a>
+        </p>
 
 
+
+        {% endfor %}
+    {% endif %}
+</div>
 
 {% endblock %}
 {% block sidebar %}
