@@ -7,7 +7,6 @@
 
 {% block content %}
     <div class="col-md-8">
-    {% if not filter %}
         {% for article in articles %}
             {% if article.is_published and not article.is_deleted  %}
                 <article>
@@ -66,18 +65,6 @@
                 </li>
             </ul>
         </article>
-    {% else %}
-        <h2>Результаты поиска:</h2>
-        <div class="space"></div>
-    {% for obj in filter.qs %}
-        <p class="reply-link">
-        {{ forloop.counter }}. <a href="{% url 'mainapp:article' obj.id %}">{{ obj.title }}</a>
-        </p>
-
-
-
-        {% endfor %}
-    {% endif %}
     </div>
 {% endblock %}
 

@@ -7,45 +7,57 @@
 
 {% block content %}
     <div class="container">
-        {% include 'personalapp/includes/inc_left_menu.html' %}
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h2 class="blog-title text-center">Мои статьи</h2>
-            <br>
-             <button type="button" class="btn btn-info"><a href="{% url 'personal:articles_create' %}">Создать статью</a></button>
-            <br>
+            <div class="space"></div>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Тема статьи</th>
-                    <th>Дата создания</th>
-                    <th>Публикация</th>
-                    <th></th>
+                    <th class="text-center">Тема статьи</th>
+                    <th class="text-center">Дата создания</th>
+                    <th class="text-center">Последние изменения</th>
+                    <th class="text-center">Публикация</th>
+                    <th class="text-center">Удаление</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td><a href="">Material дизайн в вебе</a></td>
-                    <td>24-01-2022</td>
-                    <td><button type="button" class="btn-sm btn-success">Опубликовать</button></td>
-                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td><a href="">Будущее СSS</a></td>
-                    <td>01-01-2022</td>
-                    <td><button type="button" class="btn-sm btn-success">Опубликовать</button></td>
-                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><a href="">Новый маркетинг</a></td>
-                    <td>30-01-2022</td>
-                    <td><button type="button" class="btn-sm btn-danger">Снять с публикации</button></td>
-                    <td><a href=""><i class="ico-circle-cross"></i></a></td>
-                </tr>
+                {% for article in articles %}
+                    {% if not article.is_deleted %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td><a href="{% url 'personal:articles_update' article.id %}">{{ article.title }}</a></td>
+                            <td class="text-center">{{ article.create_date|date:"d E o" }}</td>
+                            <td class="text-center">{{ article.edit_date|date:"d E o" }}</td>
+                            <td>
+                                {% if article.is_published %}
+                                    <button type="button" class="btn-sm btn-danger"><a
+                                            href="{% url 'mainapp:unpublish_article' article.id %}">Снять c
+                                        публикации</a>
+                                    </button>
+                                {% else %}
+                                    {% if article.for_moderation %}
+                                        <button type="button" class="btn-sm btn-warning">Статья на модерации</button>
+                                    {% else %}
+                                        <button type="button" class="btn-sm btn-success"><a
+                                                href="{% url 'mainapp:moderate_article' article.id %}">Опубликовать</a>
+                                        </button>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            <td class="text-center"><a href="{% url 'mainapp:delete_article' article.id %}"><i
+                                    class="ico-circle-cross"></i></a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
                 </tbody>
             </table>
-
+        </div>
+        <div class="col-md-12">
+            <button type="button" class="btn btn-default center-block">
+                <a href="{% url 'personal:articles_create' %}">Создать статью</a>
+            </button>
+        </div>
+        <div class="space"></div>
+    </div>
 {% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-12">
+            <h2 class="blog-title text-center">Статьи для модерации</h2>
+            <div class="space"></div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="text-center">Тема статьи</th>
+                    <th class="text-center">Автор</th>
+                    <th class="text-center">Дата</th>
+                    <th class="text-center">Публикация</th>
+                    <th class="text-center">Отказ</th>
+                    <th class="text-center">Блокировать автора</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td><a href="{% url 'mainapp:article' article.id %}" target="_blank">{{ article.title }}</a></td>
+                        <td class="text-center">{{ article.author }}</td>
+                        <td class="text-center">{{ article.edit_date|date:"d E o" }}</td>
+                        <td class="text-center"><button type="button" class="btn-sm btn-success">
+                            <a href="{% url 'mainapp:publish_article' article.id %}">Опубликовать</a>
+                                    </button></td>
+                        <td class="text-center"><button type="button" class="btn-sm btn-warning">
+                            <a href="{% url 'mainapp:refuse_article' article.id %}">Отказать</a>
+                                    </button></td>
+                        <td class="text-center"><button type="button" class="btn-sm btn-danger">
+                            <a href="#">Блокировать автора</a>
+                                    </button></td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="space"></div>
+    </div>
+{% endblock %}
