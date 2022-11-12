@@ -31,6 +31,9 @@ class Article(models.Model):
     is_published = models.BooleanField(default=False)
     for_moderation = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['edit_date']
+
     def delete(self, *args, **kwargs):
         self.is_deleted = True
         self.save()
@@ -51,24 +54,3 @@ class Comment(models.Model):
     class Meta:
         ordering = ['path']
 
-    @classmethod
-    def create(cls, article, comment_body, author, parent_path=None):
-        path = str(cls.pk).zfill(9) if parent_path is None else f'{parent_path}.{str(cls.pk).zfill(9)}'
-        level = path.count('.')
-        comment = cls(path=path,
-                      level=level,
-                      comment_body=comment_body,
-                      author=author,
-                      article=article
-                      )
-        return comment
-
-    # def __init__(self, article, comment_body, author, parent_path=None, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     _id = comment_ids.get_next_value()
-    #     self.id = _id
-    #     self.path = str(self.id).zfill(9) if parent_path is None else f'{parent_path}.{str(self.id).zfill(9)}'
-    #     self.level = self.path.count('.')
-    #     self.comment_body = comment_body
-    #     self.author = author
-    #     self.article = article

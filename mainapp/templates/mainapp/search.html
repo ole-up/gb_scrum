@@ -1,0 +1,73 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block menu %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-8">
+        {% for article in articles %}
+            {% if article.is_published and not article.is_deleted  %}
+                <article>
+                    <div class="blog-item-wrap">
+                        <h2 class="blog-title"><a href="{% url 'mainapp:article' article.id %}">{{ article.title }}</a>
+                        </h2>
+                        <div class="entry-meta">
+                            <span class="meta-part"><i class="ico-user"></i><a
+                                    href="./index.html"> {{ article.author.last_name }} {{ article.author.first_name }}</a></span>
+                            <span class="meta-part"><i class="ico-calendar-alt-fill"></i><a
+                                    href="./index.html"> {{ article.edit_date|date:"d E o" }}</a></span>
+                            {#                    <span class="meta-part"><i class="ico-comments"></i><a href="./index.html">20</a></span>#}
+                            <span class="meta-part"><i class="ico-tag"></i><a
+                                    href="{% url 'mainapp:articles' article.category.id %}"> {{ article.category }}</a></span>
+                            {#                    <span class="meta-part"><i class="ico-star"></i><a href="./index.html">7.5</a></span>#}
+                        </div>
+
+                        <div class="feature-inner">
+                            <a data-lightbox="roadtrip" href="{{ article.image.url }}"><img alt=""
+                                                                                            src="{{ article.image.url }}"></a>
+                        </div>
+
+                        <div class="post-content">
+                            {{ article.description|safe|truncatechars_html:400 }}
+                        </div>
+                        <div class="entry-more">
+                            <div class="pull-left">
+                                <a class="btn btn-common" href="{% url 'mainapp:article' article.id %}">Далее <i
+                                        class="ico-arrow-right"></i></a>
+                            </div>
+                            <div class="share-icon pull-right">
+                                <span class="socialShare"></span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endif %}
+        {% endfor %}
+
+        <article>
+
+            <ul class="pager">
+                <li class="previous{% if not articles.has_previous %} disabled hide{% endif %} ">
+                    <a href="{% if articles.has_previous %} {% url 'articles:page' articles.previous_page_number %} {% endif %}"><i
+                            class="ico-arrow-left"></i>Предыдущая</a>
+                </li>
+                {% for page in articles.paginator.page_range %}
+                    <li style="list-style: none">
+                        <span class="{% if page == articles.number %} active {% endif %}"><a
+                                href="{% url 'articles:page' page %}">{{ page }}</a></span>
+                    </li>
+                {% endfor %}
+                <li class="next {% if not articles.has_next %} disabled hide{% endif %}">
+                    <a href="{% if articles.has_next %} {% url 'articles:page' articles.next_page_number %} {% endif %}">Следующая<i
+                            class="ico-arrow-right"></i></a>
+                </li>
+            </ul>
+        </article>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'mainapp/includes/inc_sidebar.html' %}
+{% endblock sidebar %}
